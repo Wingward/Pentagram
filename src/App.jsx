@@ -9,7 +9,7 @@ function App() {
   // --- FORM STATE YÖNETİMİ ---
   const [cargoList, setCargoList] = useState([]);
   const [transportMode, setTransportMode] = useState('road');
-  const [fileName, setFileName] = useState(''); // Dosya adı gösterimi için
+  const [fileName, setFileName] = useState('');
 
   const [currentCargo, setCurrentCargo] = useState({
     dims: '',
@@ -18,7 +18,6 @@ function App() {
     stack: 'Evet'
   });
 
-  // Araç/Konteyner Seçenekleri (Keys for Translation)
   const vehicleOptions = {
     road: ['opt_tilt', 'opt_frigo', 'opt_box', 'opt_mega', 'opt_lowbed'],
     sea: ['opt_20dc', 'opt_40dc', 'opt_40hc', 'opt_opentop', 'opt_flatrack'],
@@ -71,16 +70,23 @@ function App() {
   const translations = {
     tr: {
       nav_home: "Ana Sayfa", nav_services: "Hizmetler", nav_industries: "Sektörler", nav_about: "Kurumsal", nav_comm: "İletişim", nav_contact: "Teklif Al",
-      hero_title: 'Lojistikte Sınırları <br/><span class="highlight">Pentagram</span> ile Aşın',
-      hero_desc: "İstanbul ve Roma ofislerimizle, global ticaretteki en güçlü çözüm ortağınızız. Dünyayı ayağınıza getiriyoruz.",
+      hero_title: 'Sınırların Ötesine <br/><span class="highlight">Pentagram Logistics</span> ile Ulaşın',
+      hero_desc: "İstanbul ve Roma ofislerimizle, global ticaretteki en güçlü çözüm ortağınızız.",
       hero_cta: "Hemen Teklif Alın",
       marquee_title: "GLOBAL HİZMET AĞI",
 
-      serv_title: "Hizmetlerimiz", serv_subtitle: "Tedarik zincirinizin her halkası için optimize edilmiş, uçtan uca çözümler.",
-      serv_air_title: "Hava Kargo", serv_air_desc: "Acil, bozulabilir veya değerli gönderileriniz için IATA lisanslı geniş acente ağımızla 'Time-Critical' çözümler sunuyoruz. Dünyanın her noktasına tarifeli seferlerde yer garantisi, konsolide (parsiyel) yüklemeler ve proje bazlı komple uçak kiralama (Charter) hizmetimizle hızınıza hız katıyoruz.",
-      serv_sea_title: "Deniz Yolu", serv_sea_desc: "Tüm kıtalar arası limanlarda güçlü armatör kontratlarımızla FCL (Komple) ve LCL (Parsiyel) konteyner taşımacılığı gerçekleştiriyoruz. Standart yüklemelerin yanı sıra Open Top, Flat Rack gibi özel ekipman gerektiren gabari dışı yükleriniz ve Cross-Trade operasyonlarınız için en maliyet etkin rotaları planlıyoruz.",
-      serv_road_title: "Kara Yolu", serv_road_desc: "Avrupa, Orta Doğu ve Türki Cumhuriyetler hattında, tamamı Euro 6 çevre standartlarına sahip özmal ve tedarikçi filomuzla hizmet veriyoruz. Minivan (Speedy) servisimizle 24-48 saatte Avrupa teslimatı, askılı tekstil, frigo taşımacılık ve ağır tonajlı proje yüklemelerinde sınır tanımıyoruz.",
-      serv_store_title: "Kontrat Lojistiği", serv_store_desc: "Sadece bir taşıyıcı değil, çözüm ortağınızız. İstanbul ve Roma'daki gümrüklü/serbest antrepolarımızda stok yönetimi, sipariş hazırlama (pick & pack), etiketleme, barkodlama ve kalite kontrol hizmetleri sunuyoruz. Gelişmiş WMS yazılımımızla stoklarınızı 7/24 online takip edebilirsiniz.",
+      serv_title: "Hizmetlerimiz", serv_subtitle: "Tedarik zincirinizin her halkası için optimize edilmiş çözümler.",
+      serv_air_title: "Hava Kargo",
+      serv_air_desc: "Acil ve değerli gönderileriniz için IATA lisanslı geniş acente ağımızla hizmetinizdeyiz. Tarifeli uçuşlarda yer garantisi, konsolide yüklemeler ve özel 'Charter' seçenekleriyle dünyanın her noktasına en hızlı erişimi sağlıyoruz.",
+
+      serv_sea_title: "Deniz Yolu",
+      serv_sea_desc: "Tüm dünya limanlarında güçlü armatör kontratlarımızla FCL ve LCL konteyner taşımacılığı yapıyoruz. Gabari dışı yükleriniz ve Cross-Trade operasyonlarınız için en maliyet etkin rotaları planlıyoruz.",
+
+      serv_road_title: "Kara Yolu",
+      serv_road_desc: "Avrupa, Orta Doğu ve Türki Cumhuriyetler hattında, geniş acente ağımızla komple ve parsiyel taşımacılık hizmeti veriyoruz. Yanıcı ve tehlikeli maddelerin (ADR) güvenli sevkiyatından, ekspres minivan servisine kadar her yükü zamanında ulaştırıyoruz.",
+
+      serv_store_title: "Proje & Antrepo",
+      serv_store_desc: "Standart dışı, ağır ve gabari yükleriniz için mühendislik odaklı proje taşımacılığı sunuyoruz. Türkiye ve Avrupa'daki gümrüklü/serbest antrepolarımızda depolama ve dağıtım süreçlerinizi tek elden yönetiyoruz.",
 
       proc_title: "Operasyonel Süreç", proc_sub: "Yükünüzü teslim aldığımız andan itibaren şeffaf bir yolculuk.",
       proc_step1: "Planlama & Analiz", proc_desc1: "Yükünüze en uygun rota, mod ve maliyet analizi yapılır.",
@@ -91,15 +97,17 @@ function App() {
       ind_title: "Sektörel Uzmanlık",
       ind_ship_title: "Gemi Ekipmanları", ind_ship_desc: "Gemilerin yolda kalmaması hayati önem taşır. Dünyanın tüm limanlarına gemi yedek parçalarını 'On-Board' teslimat hassasiyetiyle ve 7/24 operasyon desteğiyle ulaştırıyoruz.",
       ind_steel_title: "Demir & Çelik", ind_steel_desc: "Ağır tonajlı rulolar, borular ve sac levhalar için özel dorseler ve 'Heavy Lift' ekipmanları kullanıyoruz. Yük güvenliği için sertifikalı lashing hizmeti sağlıyoruz.",
-      ind_auto_title: "Otomotiv", ind_auto_desc: "Üretim bantlarının durmaması için JIT (Just-in-Time) ve JIS (Just-in-Sequence) teslimat modelleriyle çalışıyor, otomotiv yan sanayi için hızı garanti ediyoruz.",
-      ind_pharma_title: "Sağlık & İlaç", ind_pharma_desc: "İnsan sağlığı en büyük önceliğimiz. GDP (İyi Dağıtım Uygulamaları) standartlarına uygun, sıcaklık kontrollü (Frigo) araçlarımızla ilaç ve medikal ürünleri güvenle taşıyoruz.",
+      ind_auto_title: "Yanıcı Maddeler", ind_auto_desc: "Kimya ve endüstriyel üretimde kullanılan yanıcı, parlayıcı ve tehlikeli maddelerin (IMO/ADR) uluslararası regülasyonlara tam uyumlu ve sertifikalı olarak taşınmasında uzmanız.",
+      ind_pharma_title: "Yedek Parça", ind_pharma_desc: "Fabrikaların ve üretim hatlarının durmaması için hayati öneme sahip yedek parçaları, 'zaman kritik' hassasiyetle ve ekspres çözümlerle dünyanın her noktasına ulaştırıyoruz.",
 
-      sus_title: "Gelecek İçin Yeşil Lojistik", sus_text: "Pentagram Logistics olarak sadece bugünü değil, yarını da taşıyoruz. Karbon ayak izimizi minimize etmek için Euro 6 standartlarında araç filosu kullanıyor, intermodal taşımacılığı teşvik ediyor ve 'Kağıtsız Ofis' politikamızla dijitalleşiyoruz.", sus_badge: "Sürdürülebilirlik Hedefi 2030",
+      sus_title: "Sarsılmaz Güven ve Şeffaflık",
+      sus_text: "Pentagram Logistics olarak işimizin merkezine 'Güven'i koyuyoruz. Şeffaf süreç yönetimimiz, ulaşılabilir uzman ekibimiz ve verdiğimiz sözleri tutma konusundaki hassasiyetimizle, yükünüzü değil işinizi sahipleniyoruz. Sürpriz maliyetler yok, sadece planlandığı gibi işleyen kusursuz bir süreç var.",
+      sus_badge: "Güvenilir Çözüm Ortağı",
 
       about_title: "Pentagram Hakkında",
-      about_text: "Pentagram Logistics, lojistik dünyasında alışılagelmiş kalıpları kırmak ve sektöre 'Butik Globalleşme' anlayışını getirmek üzere kurulmuştur. Merkezimiz İstanbul'un lojistik kalbi Kartal'da atarken, 2026 yılında faaliyete geçen stratejik <strong>Roma Ofisimiz</strong> ile Avrupa operasyonlarında rakiplerimizden ayrışıyoruz.<br/><br/>Teknolojiyi operasyonlarımızın merkezine koyarak, müşterilerimize şeffaf, ölçülebilir ve sürdürülebilir çözümler sunuyoruz. Geodis, DSV gibi devlerin global erişim gücünü, yerel bir ortağın samimiyeti ve ulaşılabilirliği ile harmanlıyoruz. Amacımız sadece yük taşımak değil; müşterilerimizin ticaretine hız, güven ve değer katmaktır.",
+      about_text: "Pentagram Logistics, global ticarette hız ve güvenin yeni tanımı olmak üzere yola çıkmış, teknoloji odaklı bir çözüm ortağıdır. İstanbul'daki genel merkezimiz ve stratejik <strong>Roma Ofisimiz</strong> ile Avrupa ve Türkiye arasında güçlü bir lojistik köprüsü kuruyoruz. Butik hizmet anlayışımızla, her müşterimizin ihtiyacına özel, esnek ve şeffaf süreçler tasarlıyor; karmaşık lojistik operasyonlarını sizin için basitleştiriyoruz. Sadece yükünüzü değil, işinizi geleceğe taşıyoruz.",
 
-      contact_hq_title: "Genel Merkez (HQ)", contact_hq_addr: "Soğanlık Yeni Mah. Pegagaz Sok. No:12 A Blok, Kartal / İstanbul", contact_hq_phone: "+90 (216) 555 00 00",
+      contact_hq_title: "Genel Merkez (HQ)", contact_hq_addr: "İstMarina - Kartal - İstanbul - Türkiye", contact_hq_phone: "+90 (216) 208 92 24",
       contact_branch_title: "Avrupa Ofisi", contact_branch_addr: "Via Nazionale 184, 00184 Roma RM, Italia", contact_branch_phone: "+39 06 1234 5678",
 
       form_heading: "Navlun Teklifi İste", form_sub: "Detayları girin, operasyon ekibimiz en geç 2 saat içinde size dönüş yapsın.",
@@ -111,7 +119,6 @@ function App() {
       btn_add: "+ Listeye Ekle", btn_submit: "Teklifi Gönder",
       opt_yes: "Evet", opt_no: "Hayır",
 
-      // Dinamik Seçenekler TR
       opt_road: "Kara Yolu", opt_sea: "Deniz Yolu", opt_air: "Hava Yolu",
       opt_tilt: "Tenteli Tır", opt_frigo: "Frigo (Soğutuculu)", opt_box: "Kutu / Askılı", opt_mega: "Mega / Optima", opt_lowbed: "Lowbed (Gabari Dışı)",
       opt_20dc: "20' DC Konteyner", opt_40dc: "40' DC Konteyner", opt_40hc: "40' HC Konteyner", opt_opentop: "Open Top", opt_flatrack: "Flat Rack",
@@ -123,16 +130,16 @@ function App() {
     },
     en: {
       nav_home: "Home", nav_services: "Services", nav_industries: "Industries", nav_about: "About", nav_comm: "Contact", nav_contact: "Get Quote",
-      hero_title: 'Cross Borders with <br/><span class="highlight">Pentagram</span>',
+      hero_title: 'Reach Beyond the Borders with <br/><span class="highlight">Pentagram Logistics</span>',
       hero_desc: "Your strongest partner in global trade with our Istanbul and Rome offices.",
       hero_cta: "Get a Quote Now",
       marquee_title: "GLOBAL NETWORK",
 
       serv_title: "Our Services", serv_subtitle: "End-to-end optimized solutions for every link of your supply chain.",
       serv_air_title: "Air Freight", serv_air_desc: "We provide 'Time-Critical' solutions with our wide IATA agency network. Speed up your business with priority space guarantees on scheduled flights, consolidated shipments, and private Charter options globally.",
-      serv_sea_title: "Sea Freight", serv_sea_desc: "We perform FCL and LCL container transport with strong shipowner contracts worldwide. We plan the most cost-effective routes for standard cargoes as well as OOG loads requiring special equipment like Open Top/Flat Rack.",
-      serv_road_title: "Road Freight", serv_road_desc: "We serve on Europe, Middle East, and Turkic Republics lines with our Euro 6 fleet. From Minivan (Speedy) delivery in 24-48h to hanging textiles and heavy project cargo, we know no boundaries.",
-      serv_store_title: "Contract Logistics", serv_store_desc: "More than a carrier, we are your solution partner. We offer stock management, pick & pack, labeling, and QC services in our bonded warehouses in Istanbul and Rome, tracked 24/7 via WMS.",
+      serv_sea_title: "Sea Freight", serv_sea_desc: "We perform FCL and LCL container transport with strong shipowner contracts worldwide. We plan the most cost-effective routes for standard cargoes as well as OOG loads requiring special equipment.",
+      serv_road_title: "Road Freight", serv_road_desc: "We serve on Europe, Middle East, and Turkic Republics lines with our wide agency network. From ADR shipments to express minivan delivery, we deliver every load on time.",
+      serv_store_title: "Project & Warehouse", serv_store_desc: "We offer engineering-focused project transport for OOG and heavy cargo. We manage your storage and distribution processes in our bonded/free warehouses in Turkey and Europe.",
 
       proc_title: "Operational Process", proc_sub: "A transparent journey from pick-up to delivery.",
       proc_step1: "Planning & Analysis", proc_desc1: "Route optimization and cost analysis for your cargo.",
@@ -143,15 +150,15 @@ function App() {
       ind_title: "Industry Expertise",
       ind_ship_title: "Ship Spares", ind_ship_desc: "Keeping vessels moving is vital. We deliver ship spares to all ports worldwide with 'On-Board' delivery precision and 24/7 operational support.",
       ind_steel_title: "Iron & Steel", ind_steel_desc: "We use special trailers and 'Heavy Lift' equipment for heavy coils, pipes, and sheets. We provide certified lashing services for cargo safety.",
-      ind_auto_title: "Automotive", ind_auto_desc: "We work with JIT (Just-in-Time) and JIS delivery models to prevent production line stoppages, guaranteeing speed for the automotive sub-industry.",
-      ind_pharma_title: "Healthcare", ind_pharma_desc: "Human health is our priority. We transport pharmaceuticals safely with our GDP-compliant temperature-controlled (Reefer) vehicles.",
+      ind_auto_title: "Dangerous Goods", ind_auto_desc: "We are experts in the transport of flammable, combustible, and dangerous goods (IMO/ADR) used in chemical and industrial production, fully compliant with international regulations.",
+      ind_pharma_title: "Spare Parts", ind_pharma_desc: "We deliver vital spare parts to prevent factory stoppages to any point in the world with 'time-critical' precision and express solutions.",
 
-      sus_title: "Green Logistics", sus_text: "We carry not just for today but for tomorrow. We minimize our carbon footprint using Euro 6 fleet standards and promoting intermodal transport.", sus_badge: "Sustainability Goal 2030",
+      sus_title: "Unshakable Trust", sus_text: "At Pentagram Logistics, we put 'Trust' at the center of our business. With our transparent process management and accessible expert team, we own your business, not just your cargo. No surprise costs, just a flawless process.", sus_badge: "Reliable Partner",
 
       about_title: "About Pentagram",
-      about_text: "Pentagram Logistics was established to break conventional molds and bring a 'Boutique Globalization' approach to the industry. With our HQ in Istanbul and our strategic <strong>Rome Office opened in 2026</strong>, we distinguish ourselves in European operations.<br/><br/>Putting technology at the center, we offer transparent and sustainable solutions. We blend the global reach of giants like Geodis with the sincerity of a local partner. Our goal is to add speed, trust, and value to your trade.",
+      about_text: "Pentagram Logistics is a technology-driven solution partner set out to be the new definition of speed and trust in global trade. With our HQ in Istanbul and our strategic <strong>Rome Office</strong>, we build a strong logistics bridge between Europe and Turkey. With our boutique service approach, we design flexible and transparent processes tailored to each customer; simplifying complex logistics operations for you. We carry your business to the future.",
 
-      contact_hq_title: "Headquarters (HQ)", contact_hq_addr: "Kartal / Istanbul", contact_hq_phone: "+90 (216) 555 00 00",
+      contact_hq_title: "Headquarters (HQ)", contact_hq_addr: "IstMarina - Kartal - Istanbul - Turkiye", contact_hq_phone: "+90 (216) 208 92 24",
       contact_branch_title: "Europe Office", contact_branch_addr: "Roma / Italy", contact_branch_phone: "+39 06 1234 5678",
       form_heading: "Request Freight Quote", form_sub: "Enter details, our team will reply within 2 hours.",
       lbl_company: "Company", lbl_email: "Email", lbl_phone: "Phone", lbl_origin: "Origin", lbl_dest: "Destination",
@@ -173,7 +180,7 @@ function App() {
     },
     it: {
       nav_home: "Home", nav_services: "Servizi", nav_industries: "Settori", nav_about: "Chi Siamo", nav_comm: "Contatto", nav_contact: "Preventivo",
-      hero_title: 'Oltrepassa i Confini con <br/><span class="highlight">Pentagram</span>',
+      hero_title: 'Oltrepassa i Confini con <br/><span class="highlight">Pentagram Logistics</span>',
       hero_desc: "Il tuo partner più forte nel commercio globale con i nostri uffici di Istanbul e Roma.",
       hero_cta: "Richiedi Ora",
       marquee_title: "RETE GLOBALE",
@@ -181,8 +188,8 @@ function App() {
       serv_title: "I Nostri Servizi", serv_subtitle: "Soluzioni ottimizzate end-to-end per ogni anello della tua supply chain.",
       serv_air_title: "Trasporto Aereo", serv_air_desc: "Forniamo soluzioni 'Time-Critical' con la nostra vasta rete IATA. Acceleriamo il tuo business con garanzia di spazio, spedizioni consolidate e opzioni Charter private in tutto il mondo.",
       serv_sea_title: "Trasporto Marittimo", serv_sea_desc: "Effettuiamo trasporti FCL e LCL con forti contratti armatoriali. Pianifichiamo le rotte più convenienti per carichi standard e fuori sagoma (Open Top/Flat Rack).",
-      serv_road_title: "Trasporto Stradale", serv_road_desc: "Serviamo le linee Europa e Medio Oriente con la nostra flotta Euro 6. Dal servizio Minivan (24-48h) al trasporto tessile e progetti pesanti, non conosciamo confini.",
-      serv_store_title: "Logistica", serv_store_desc: "Più che un trasportatore, siamo il tuo partner. Offriamo gestione stock, pick & pack e controllo qualità nei nostri magazzini doganali a Istanbul e Roma, tracciabili 24/7.",
+      serv_road_title: "Trasporto Stradale", serv_road_desc: "Serviamo le linee Europa e Medio Oriente con la nostra ampia rete di agenzie. Dalle spedizioni ADR alla consegna espressa minivan, consegniamo ogni carico in tempo.",
+      serv_store_title: "Progetti e Magazzino", serv_store_desc: "Offriamo trasporto progetti ingegneristico per carichi pesanti e fuori sagoma. Gestiamo i tuoi processi di stoccaggio e distribuzione nei nostri magazzini in Turchia ed Europa.",
 
       proc_title: "Processo Operativo", proc_sub: "Un viaggio trasparente dal ritiro alla consegna.",
       proc_step1: "Pianificazione", proc_desc1: "Ottimizzazione del percorso e analisi dei costi.",
@@ -193,15 +200,15 @@ function App() {
       ind_title: "Competenza Settoriale",
       ind_ship_title: "Ricambi Navali", ind_ship_desc: "Mantenere le navi in movimento è vitale. Consegniamo ricambi in tutti i porti del mondo con precisione 'On-Board' e supporto 24/7.",
       ind_steel_title: "Ferro e Acciaio", ind_steel_desc: "Utilizziamo rimorchi speciali per bobine e attrezzature 'Heavy Lift'. Forniamo servizi di lashing certificati per la sicurezza del carico.",
-      ind_auto_title: "Automotive", ind_auto_desc: "Lavoriamo con modelli JIT e JIS per prevenire fermi linea, garantendo velocità per l'industria automobilistica.",
-      ind_pharma_title: "Salute", ind_pharma_desc: "La salute umana è la nostra priorità. Trasportiamo farmaci in sicurezza con i nostri veicoli a temperatura controllata (GDP).",
+      ind_auto_title: "Merci Pericolose", ind_auto_desc: "Siamo esperti nel trasporto di merci infiammabili e pericolose (IMO/ADR) utilizzate nella produzione chimica e industriale, in conformità con le normative internazionali.",
+      ind_pharma_title: "Pezzi di Ricambio", ind_pharma_desc: "Consegniamo pezzi di ricambio vitali per macchinari in qualsiasi punto del mondo con precisione 'time-critical' e soluzioni espresse.",
 
-      sus_title: "Logistica Verde", sus_text: "Riduciamo la nostra impronta di carbonio utilizzando flotte Euro 6 e promuovendo il trasporto intermodale.", sus_badge: "Obiettivo Sostenibilità 2030",
+      sus_title: "Fiducia Incrollabile", sus_text: "In Pentagram Logistics, mettiamo la 'Fiducia' al centro. Con la nostra gestione trasparente, facciamo nostro il tuo business. Nessun costo a sorpresa, solo un processo impeccabile.", sus_badge: "Partner Affidabile",
 
       about_title: "Su Pentagram",
-      about_text: "Pentagram Logistics è nata per rompere gli schemi e portare la 'Globalizzazione Boutique'. Con la nostra sede a Istanbul e l'ufficio strategico di <strong>Roma aperto nel 2026</strong>, ci distinguiamo nelle operazioni europee.<br/><br/>Mettendo la tecnologia al centro, offriamo soluzioni trasparenti. Uniamo la portata globale di giganti come Geodis alla sincerità di un partner locale. Il nostro obiettivo è aggiungere valore al tuo commercio.",
+      about_text: "Pentagram Logistics è un partner orientato alla tecnologia, nato per essere la nuova definizione di velocità e fiducia nel commercio globale. Con la nostra sede a Istanbul e l'ufficio strategico di <strong>Roma</strong>, costruiamo un forte ponte logistico tra Europa e Turchia. Con il nostro approccio boutique, semplifichiamo le operazioni complesse per te.",
 
-      contact_hq_title: "Sede Centrale (HQ)", contact_hq_addr: "Kartal / Istanbul", contact_hq_phone: "+90 (216) 555 00 00",
+      contact_hq_title: "Sede Centrale (HQ)", contact_hq_addr: "IstMarina - Kartal - Istanbul - Turchia", contact_hq_phone: "+90 (216) 208 92 24",
       contact_branch_title: "Ufficio Europa", contact_branch_addr: "Roma / Italia", contact_branch_phone: "+39 06 1234 5678",
       form_heading: "Richiedi Preventivo", form_sub: "Inserisci i dettagli, il nostro team risponderà entro 2 ore.",
       lbl_company: "Azienda", lbl_email: "Email", lbl_phone: "Telefono", lbl_origin: "Origine", lbl_dest: "Destinazione",
@@ -243,9 +250,20 @@ function App() {
             <li><a href="#about">{t.nav_about}</a></li>
             <li><a href="#about">{t.nav_comm}</a></li>
             <li><a href="#quote">{t.nav_contact}</a></li>
+
+            {/* MOBIL MENÜ DİL SEÇENEĞİ */}
+            <li className="mobile-lang-wrapper">
+              <div className="lang-switch-mobile">
+                <button className={lang === 'tr' ? 'active' : ''} onClick={() => setLang('tr')}>TR</button>
+                <button className={lang === 'en' ? 'active' : ''} onClick={() => setLang('en')}>EN</button>
+                <button className={lang === 'it' ? 'active' : ''} onClick={() => setLang('it')}>IT</button>
+              </div>
+            </li>
           </ul>
+
           <div className="right-actions">
-            <div className="lang-switch">
+            {/* MASAÜSTÜ DİL SEÇENEĞİ */}
+            <div className="lang-switch desktop-only">
               <button className={lang === 'tr' ? 'active' : ''} onClick={() => setLang('tr')}>TR</button>
               <button className={lang === 'en' ? 'active' : ''} onClick={() => setLang('en')}>EN</button>
               <button className={lang === 'it' ? 'active' : ''} onClick={() => setLang('it')}>IT</button>
@@ -276,8 +294,17 @@ function App() {
         <div className="marquee-label">{t.marquee_title}</div>
         <div className="marquee-wrapper">
           <div className="marquee-content">
-            <span>🇹🇷 Türkiye</span><span>🇮🇹 Italy</span><span>🇩🇪 Germany</span><span>🇳🇱 Netherlands</span><span>🇫🇷 France</span><span>🇬🇧 UK</span><span>🇪🇸 Spain</span><span>🇧🇪 Belgium</span><span>🇨🇳 China</span><span>🇺🇸 USA</span>
-            <span>🇹🇷 Türkiye</span><span>🇮🇹 Italy</span><span>🇩🇪 Germany</span><span>🇳🇱 Netherlands</span><span>🇫🇷 France</span><span>🇬🇧 UK</span><span>🇪🇸 Spain</span><span>🇧🇪 Belgium</span><span>🇨🇳 China</span><span>🇺🇸 USA</span>
+            {/* GRUP 1 */}
+            <span>🇹🇷 Türkiye</span><span>🇮🇹 İtalya</span><span>🇸🇾 Suriye</span><span>🇮🇶 Irak</span><span>🇮🇷 İran</span><span>🇰🇼 Kuveyt</span><span>🇶🇦 Katar</span>
+            <span>🇩🇪 Almanya</span><span>🇳🇱 Hollanda</span><span>🇫🇷 Fransa</span><span>🇬🇧 İngiltere</span><span>🇪🇸 İspanya</span><span>🇧🇪 Belçika</span>
+            <span>🇦🇹 Avusturya</span><span>🇨🇭 İsviçre</span><span>🇵🇱 Polonya</span><span>🇨🇳 Çin</span><span>🇰🇷 G. Kore</span><span>🇺🇸 ABD</span><span>🇨🇦 Kanada</span>
+            <span>🇯🇵 Japonya</span><span>🇮🇳 Hindistan</span><span>🇪🇬 Mısır</span>
+
+            {/* GRUP 2 (TEKRAR) */}
+            <span>🇹🇷 Türkiye</span><span>🇮🇹 İtalya</span><span>🇸🇾 Suriye</span><span>🇮🇶 Irak</span><span>🇮🇷 İran</span><span>🇰🇼 Kuveyt</span><span>🇶🇦 Katar</span>
+            <span>🇩🇪 Almanya</span><span>🇳🇱 Hollanda</span><span>🇫🇷 Fransa</span><span>🇬🇧 İngiltere</span><span>🇪🇸 İspanya</span><span>🇧🇪 Belçika</span>
+            <span>🇦🇹 Avusturya</span><span>🇨🇭 İsviçre</span><span>🇵🇱 Polonya</span><span>🇨🇳 Çin</span><span>🇰🇷 G. Kore</span><span>🇺🇸 ABD</span><span>🇨🇦 Kanada</span>
+            <span>🇯🇵 Japonya</span><span>🇮🇳 Hindistan</span><span>🇪🇬 Mısır</span>
           </div>
         </div>
       </section>
@@ -289,9 +316,10 @@ function App() {
             <p>{t.serv_subtitle}</p>
           </div>
           <div className="grid-4">
-            <div className="unified-card glass-panel"><i className="fas fa-plane-departure card-icon"></i><h3>{t.serv_air_title}</h3><p>{t.serv_air_desc}</p></div>
-            <div className="unified-card glass-panel"><i className="fas fa-ship card-icon"></i><h3>{t.serv_sea_title}</h3><p>{t.serv_sea_desc}</p></div>
+            {/* YENİ SIRALAMA: KARA - DENİZ - HAVA - PROJE */}
             <div className="unified-card glass-panel"><i className="fas fa-truck-moving card-icon"></i><h3>{t.serv_road_title}</h3><p>{t.serv_road_desc}</p></div>
+            <div className="unified-card glass-panel"><i className="fas fa-ship card-icon"></i><h3>{t.serv_sea_title}</h3><p>{t.serv_sea_desc}</p></div>
+            <div className="unified-card glass-panel"><i className="fas fa-plane-departure card-icon"></i><h3>{t.serv_air_title}</h3><p>{t.serv_air_desc}</p></div>
             <div className="unified-card glass-panel"><i className="fas fa-warehouse card-icon"></i><h3>{t.serv_store_title}</h3><p>{t.serv_store_desc}</p></div>
           </div>
         </div>
@@ -341,8 +369,8 @@ function App() {
           <div className="grid-4">
             <div className="unified-card glass-panel"><i className="fas fa-anchor card-icon"></i><h3>{t.ind_ship_title}</h3><p>{t.ind_ship_desc}</p></div>
             <div className="unified-card glass-panel"><i className="fas fa-hard-hat card-icon"></i><h3>{t.ind_steel_title}</h3><p>{t.ind_steel_desc}</p></div>
-            <div className="unified-card glass-panel"><i className="fas fa-car card-icon"></i><h3>{t.ind_auto_title}</h3><p>{t.ind_auto_desc}</p></div>
-            <div className="unified-card glass-panel"><i className="fas fa-pills card-icon"></i><h3>{t.ind_pharma_title}</h3><p>{t.ind_pharma_desc}</p></div>
+            <div className="unified-card glass-panel"><i className="fas fa-burn card-icon"></i><h3>{t.ind_auto_title}</h3><p>{t.ind_auto_desc}</p></div>
+            <div className="unified-card glass-panel"><i className="fas fa-cogs card-icon"></i><h3>{t.ind_pharma_title}</h3><p>{t.ind_pharma_desc}</p></div>
           </div>
         </div>
       </section>
@@ -355,7 +383,7 @@ function App() {
               <h2>{t.sus_title}</h2>
               <p>{t.sus_text}</p>
             </div>
-            <div className="sustain-icon"><i className="fas fa-leaf"></i></div>
+            <div className="sustain-icon"><i className="fas fa-handshake"></i></div>
           </div>
         </div>
       </section>
@@ -403,7 +431,6 @@ function App() {
                 <div className="input-group"><label>{t.lbl_dest}</label><input type="text" name="dest" required /></div>
               </div>
 
-              {/* MODA GÖRE DEĞİŞEN ARAÇ TİPLERİ */}
               <div className="form-row">
                 <div className="input-group">
                   <label>{t.lbl_mode}</label>
@@ -455,7 +482,6 @@ function App() {
 
               <div className="form-row-full"><div className="input-group"><label>{t.lbl_note}</label><textarea name="note" rows="4"></textarea></div></div>
 
-              {/* ÖZEL DOSYA YÜKLEME BUTONU */}
               <div className="form-row-full">
                 <div className="input-group">
                   <label>{t.lbl_file}</label>
@@ -479,7 +505,7 @@ function App() {
           <div className="footer-grid">
             <div className="footer-col">
               <h4>PENTAGRAM</h4>
-              <p>HQ: İSTMarina, Kartal / İstanbul</p>
+              <p>HQ: İstMarina - Kartal - İstanbul - Türkiye</p>
               <p>Branch: Via Nazionale, Roma / Italia</p>
               <p>Email: sales@pentagramlogistics.com</p>
             </div>
@@ -508,8 +534,6 @@ function App() {
               <i className="fab fa-linkedin"></i>
               <i className="fab fa-instagram"></i>
               <i className="fab fa-twitter"></i>
-              <i className="fab fa-facebook"></i>
-              <i className="fab fa-youtube"></i>
             </div>
           </div>
         </div>

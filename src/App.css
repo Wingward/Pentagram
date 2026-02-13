@@ -178,6 +178,30 @@ textarea {
   cursor: pointer;
 }
 
+/* MOBIL DİL AYARLARI */
+.mobile-lang-wrapper {
+  display: none;
+}
+
+.lang-switch-mobile {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.lang-switch-mobile button {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--glass-border);
+  color: white;
+  padding: 8px 16px;
+  border-radius: 5px;
+}
+
+.lang-switch-mobile button.active {
+  background: var(--accent);
+}
+
 /* HERO */
 .hero-section {
   min-height: 100vh;
@@ -818,7 +842,6 @@ textarea {
   outline: none;
 }
 
-/* ÖZEL DOSYA BUTONU TASARIMI */
 .custom-file-button {
   background: rgba(0, 136, 204, 0.1);
   border: 1px dashed var(--glass-border);
@@ -1048,5 +1071,29 @@ textarea {
   .sustain-icon {
     font-size: 6rem;
     margin-bottom: 20px;
+  }
+
+  /* MOBİL DİL AYARLARI */
+  .desktop-only {
+    display: none !important;
+  }
+
+  .nav-links.active {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 90px;
+    left: 0;
+    width: 100%;
+    background: #050a14;
+    padding: 20px;
+    border-bottom: 1px solid var(--glass-border);
+  }
+
+  .mobile-lang-wrapper {
+    display: block;
+    margin-top: 15px;
+    border-top: 1px solid var(--glass-border);
+    padding-top: 15px;
   }
 }
