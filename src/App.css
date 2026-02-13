@@ -1073,6 +1073,13 @@ textarea {
     margin-bottom: 20px;
   }
 
+  /* MARQUEE MOBIL DÜZENLEME */
+  .marquee-label {
+    font-size: 0.8rem;
+    padding: 0 10px;
+    letter-spacing: 1px;
+  }
+
   /* MOBİL DİL AYARLARI */
   .desktop-only {
     display: none !important;

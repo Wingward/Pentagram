@@ -107,7 +107,7 @@ function App() {
       about_title: "Pentagram Hakkında",
       about_text: "Pentagram Logistics, global ticarette hız ve güvenin yeni tanımı olmak üzere yola çıkmış, teknoloji odaklı bir çözüm ortağıdır. İstanbul'daki genel merkezimiz ve stratejik <strong>Roma Ofisimiz</strong> ile Avrupa ve Türkiye arasında güçlü bir lojistik köprüsü kuruyoruz. Butik hizmet anlayışımızla, her müşterimizin ihtiyacına özel, esnek ve şeffaf süreçler tasarlıyor; karmaşık lojistik operasyonlarını sizin için basitleştiriyoruz. Sadece yükünüzü değil, işinizi geleceğe taşıyoruz.",
 
-      contact_hq_title: "Genel Merkez (HQ)", contact_hq_addr: "İstMarina - Kartal - İstanbul - Türkiye", contact_hq_phone: "+90 (216) 208 92 24",
+      contact_hq_title: "Genel Merkez (HQ)", contact_hq_addr: "İSTMarina - Kartal - İstanbul / Türkiye", contact_hq_phone: "+90 (216) 208 92 24",
       contact_branch_title: "Avrupa Ofisi", contact_branch_addr: "Via Nazionale 184, 00184 Roma RM, Italia", contact_branch_phone: "+39 06 1234 5678",
 
       form_heading: "Navlun Teklifi İste", form_sub: "Detayları girin, operasyon ekibimiz en geç 2 saat içinde size dönüş yapsın.",
@@ -158,7 +158,7 @@ function App() {
       about_title: "About Pentagram",
       about_text: "Pentagram Logistics is a technology-driven solution partner set out to be the new definition of speed and trust in global trade. With our HQ in Istanbul and our strategic <strong>Rome Office</strong>, we build a strong logistics bridge between Europe and Turkey. With our boutique service approach, we design flexible and transparent processes tailored to each customer; simplifying complex logistics operations for you. We carry your business to the future.",
 
-      contact_hq_title: "Headquarters (HQ)", contact_hq_addr: "IstMarina - Kartal - Istanbul - Turkiye", contact_hq_phone: "+90 (216) 208 92 24",
+      contact_hq_title: "Headquarters (HQ)", contact_hq_addr: "ISTMarina - Kartal - Istanbul / Turkiye", contact_hq_phone: "+90 (216) 208 92 24",
       contact_branch_title: "Europe Office", contact_branch_addr: "Roma / Italy", contact_branch_phone: "+39 06 1234 5678",
       form_heading: "Request Freight Quote", form_sub: "Enter details, our team will reply within 2 hours.",
       lbl_company: "Company", lbl_email: "Email", lbl_phone: "Phone", lbl_origin: "Origin", lbl_dest: "Destination",
@@ -208,7 +208,7 @@ function App() {
       about_title: "Su Pentagram",
       about_text: "Pentagram Logistics è un partner orientato alla tecnologia, nato per essere la nuova definizione di velocità e fiducia nel commercio globale. Con la nostra sede a Istanbul e l'ufficio strategico di <strong>Roma</strong>, costruiamo un forte ponte logistico tra Europa e Turchia. Con il nostro approccio boutique, semplifichiamo le operazioni complesse per te.",
 
-      contact_hq_title: "Sede Centrale (HQ)", contact_hq_addr: "IstMarina - Kartal - Istanbul - Turchia", contact_hq_phone: "+90 (216) 208 92 24",
+      contact_hq_title: "Sede Centrale (HQ)", contact_hq_addr: "ISTMarina - Kartal - Istanbul / Turchia", contact_hq_phone: "+90 (216) 208 92 24",
       contact_branch_title: "Ufficio Europa", contact_branch_addr: "Roma / Italia", contact_branch_phone: "+39 06 1234 5678",
       form_heading: "Richiedi Preventivo", form_sub: "Inserisci i dettagli, il nostro team risponderà entro 2 ore.",
       lbl_company: "Azienda", lbl_email: "Email", lbl_phone: "Telefono", lbl_origin: "Origine", lbl_dest: "Destinazione",
@@ -505,7 +505,7 @@ function App() {
           <div className="footer-grid">
             <div className="footer-col">
               <h4>PENTAGRAM</h4>
-              <p>HQ: İstMarina - Kartal - İstanbul - Türkiye</p>
+              <p>HQ: İSTMarina, Kartal / İstanbul</p>
               <p>Branch: Via Nazionale, Roma / Italia</p>
               <p>Email: sales@pentagramlogistics.com</p>
             </div>
