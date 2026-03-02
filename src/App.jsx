@@ -5,6 +5,7 @@ import logoImg from './logo.png';
 function App() {
   const [lang, setLang] = useState('tr');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [currentPage, setCurrentPage] = useState('home'); // 'home' veya 'terms'
 
   // --- FORM STATE YÖNETİMİ ---
   const [cargoList, setCargoList] = useState([]);
@@ -22,6 +23,28 @@ function App() {
     road: ['opt_tilt', 'opt_frigo', 'opt_box', 'opt_mega', 'opt_lowbed'],
     sea: ['opt_20dc', 'opt_40dc', 'opt_40hc', 'opt_opentop', 'opt_flatrack'],
     air: ['opt_std_air', 'opt_charter', 'opt_express']
+  };
+
+  // Navigasyon Yönlendirme Fonksiyonu
+  const navigateTo = (page, sectionId = null) => {
+    setCurrentPage(page);
+    setIsMenuOpen(false);
+    if (page === 'home') {
+      if (sectionId) {
+        setTimeout(() => {
+          const el = document.getElementById(sectionId);
+          if (el) {
+            const yOffset = -90; // Navbar yüksekliği
+            const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
+            window.scrollTo({ top: y, behavior: 'smooth' });
+          }
+        }, 100);
+      } else {
+        window.scrollTo(0, 0);
+      }
+    } else {
+      window.scrollTo(0, 0);
+    }
   };
 
   const addCargo = () => {
@@ -67,9 +90,76 @@ function App() {
     window.location.href = `mailto:alp@pentagramlogistics.com?subject=Navlun Teklif - ${company}&body=${encodeURIComponent(body)}`;
   };
 
+  // --- ŞARTNAME LİSTELERİ ---
+  const termsListTR = [
+    "Taşımalarımız CMR konvansiyonu kapsamında olup, sorumluluğumuz konvansiyon hükümleri ile sınırlıdır. Bu nedenle, ayrıca bir Emtia Nakliye Sigortası yaptırmanızı önemle tavsiye ederiz.",
+    "Teklifimiz anlaşmalı olduğumuz antrepo teslim için geçerlidir.",
+    "Yük onayınızdan veya alım sonrasında iptal edilen siparişleriniz de acente/ofis tarafından bir masraf yapıldı ise tarafınıza iletilecektir.",
+    "Yüklemeler kap ve kg olarak özet beyan da işlem görüp, içeriği ile ilgili kayıp, eksik vs. durumlar sorumluluğumuzda değildir.",
+    "Tasiş Ambar teslim yüklemeleriniz de yükün indirilmesi ve istendiği takdirde teminat ücreti yüklemeyi veren firmaya/yük sahibine aittir. (Ayrıca tahliye için özel bir teçhizat istendiği takdirde ise müşteriye/alıcıya aittir.)",
+    "Antrepo beyanname verme süresi aşımlarında firmamız sorumlu değildir.",
+    "Karayolu taşımalarında 1 m3 = 333 kgs ve 1 lademetre (yükleme metresi) = 1.750 kg olarak hesaplanır.",
+    "Fiyatlarımız ölçü ve ağırlık olarak standart tenteli TIR’lara yüklenebilecek yükler için geçerlidir.",
+    "Taşınacak malzemelerin ağırlık ve kap sayılarındaki tutarsızlık ve/veya yanlışlıkların gönderici ve/veya alıcı kaynaklı sebeplerden oluşması durumunda düzeltme için gerekecek masraflar ve oluşabilecek cezalar gönderici ve alıcının sorumluluğundadır.",
+    "Yükün, belirtilen ölçülerden farklı olması ve yük cinsinin veya mal bedelinin firmamız tarafından taşınamaz mal cinsi olması ve/veya mal bedeli olması durumunda firmamız navlununu revize etme ve/veya taşımayı reddetme hakkını saklı tutar.",
+    "Önceden bildirilmeyen 2. el makine, gıda içerikli ürün, bitki, fuar, cam, mobilya, şahıs, geri iade yüklerinizin taşımasını reddetme hakkımız saklıdır.",
+    "Taşımalarda ambalajlama hatalarından doğabilecek tüm risk göndericiye ve alıcıya aittir.",
+    "Taşınan malların taşıma süresince çevre ve doğaya verebileceği zararlar ile yol boyunca sürtünme ve sarsıntıdan ötürü meydana gelebilecek tüm risk ve sorumluluk gönderici ve alıcıya aittir.",
+    "Bu teklif kapsamında yapılan taşımalardan doğabilecek ihtilaflarda İstanbul mahkemeleri ve icra daireleri yetkilidir.",
+    "Faturalarımız döviz olarak kesilir ve döviz olarak vadesinde tahsil edilir.",
+    "Vadesinde ödenmeyen fatura tutarlar, döviz üzerinden aylık %5 gecikme faiziyle birlikte tahsil edilecektir.",
+    "Teklifimiz yanıcılı olmayan kuru yükler için geçerli olup, taşınmasına müsaade edilen yanıcı sınıfındaki (ADR) yüklerin, firmamıza önceden bildirilmesi gerekmektedir, bununla birlikte navlun farkı oluşacaktır.",
+    "İthalat yönünde Norveç’ten gerçekleşen ve mal bedeli 35.000 € üzerindeki yüklemelerinizde T1 garanti ücreti kapsamında 7 ‱ (On binde) ek masraf oluşacaktır.",
+    "İthalat yüklemelerinde 3 GTIP kodundan sonra GTIP kodu başına 5 EUR ekstra masraf oluşmaktadır."
+  ];
+
+  const termsListEN = [
+    "Our transports are covered by the CMR convention, and our liability is limited to its provisions. We strongly advise you to obtain separate Cargo Insurance.",
+    "Our offer is valid for delivery to our contracted warehouses.",
+    "If any expenses are incurred by the agency/office for orders cancelled after load confirmation or pickup, they will be billed to you.",
+    "Shipments are processed on the summary declaration by package and weight; we are not responsible for loss, missing items, etc., regarding the contents.",
+    "For deliveries to Tasiş Warehouses, unloading and, if required, guarantee fees belong to the loading company/cargo owner.",
+    "Our company is not responsible for exceeding the time limits for submitting warehouse declarations.",
+    "In road transport, 1 cbm = 333 kg and 1 loading meter = 1,750 kg.",
+    "Our prices are valid for loads with dimensions and weights suitable for standard tilt trailers.",
+    "If discrepancies/errors in the weight and number of packages arise due to the sender and/or recipient, the costs and potential penalties required for correction are their responsibility.",
+    "Our company reserves the right to revise the freight or refuse transportation if the load differs from the stated dimensions, or if the cargo type or value is unacceptable to us.",
+    "We reserve the right to refuse transport of previously undeclared second-hand machinery, food products, plants, fair goods, glass, furniture, personal effects, and return loads.",
+    "All risks arising from packaging errors during transport belong to the sender and recipient.",
+    "All risks and responsibilities for damages the transported goods may cause to the environment, as well as damages from friction and vibration during transit, belong to the sender and recipient.",
+    "Istanbul courts and enforcement offices are authorized for disputes arising from transports under this proposal.",
+    "Our invoices are issued in foreign currency and collected in foreign currency upon maturity.",
+    "Invoice amounts not paid at maturity will be collected with a 5% monthly delay interest on the foreign currency.",
+    "Our offer is valid for non-flammable dry cargo; permitted flammable (ADR) loads must be notified to us in advance, and a freight difference will apply.",
+    "For import shipments from Norway with a value over €35,000, an additional 0.07% cost will apply under the T1 guarantee fee.",
+    "For import shipments, an extra cost of 5 EUR per GTIP code applies after the 3rd GTIP code."
+  ];
+
+  const termsListIT = [
+    "I nostri trasporti sono coperti dalla convenzione CMR e la nostra responsabilità è limitata alle sue disposizioni. Consigliamo vivamente di stipulare un'assicurazione merci separata.",
+    "La nostra offerta è valida per la consegna presso i nostri magazzini convenzionati.",
+    "Se vengono sostenute spese dall'agenzia/ufficio per ordini annullati dopo la conferma o il ritiro del carico, tali spese vi saranno addebitate.",
+    "Le spedizioni sono elaborate sulla dichiarazione sommaria per collo e peso; non siamo responsabili per perdite, articoli mancanti, ecc., riguardanti il contenuto.",
+    "Per le consegne ai magazzini doganali, le operazioni di scarico e le spese di garanzia sono a carico dell'azienda caricatrice/proprietario del carico.",
+    "La nostra azienda non è responsabile per il superamento dei limiti di tempo per la presentazione delle dichiarazioni di magazzino.",
+    "Nel trasporto stradale, 1 m3 = 333 kg e 1 metro di carico = 1.750 kg.",
+    "I nostri prezzi sono validi per carichi con dimensioni e pesi adatti ai rimorchi telonati standard.",
+    "Qualora si verifichino discrepanze/errori nel peso e nel numero di colli a causa del mittente e/o del destinatario, i costi e le eventuali sanzioni per la correzione sono di loro competenza.",
+    "La nostra azienda si riserva il diritto di rivedere il nolo o di rifiutare il trasporto se il carico differisce dalle dimensioni dichiarate o se il tipo di merce o il valore non è accettabile.",
+    "Ci riserviamo il diritto di rifiutare il trasporto di macchinari di seconda mano non dichiarati, prodotti alimentari, piante, articoli da fiera, vetro, mobili e carichi di ritorno.",
+    "Tutti i rischi derivanti da errori di imballaggio durante il trasporto appartengono al mittente e al destinatario.",
+    "Tutti i rischi e le responsabilità per danni che le merci trasportate possono causare all'ambiente, nonché danni da attrito e vibrazioni, appartengono al mittente e al destinatario.",
+    "I tribunali e gli uffici di esecuzione di Istanbul sono competenti per le controversie derivanti dai trasporti previsti in questa proposta.",
+    "Le nostre fatture sono emesse in valuta estera e riscosse in valuta estera alla scadenza.",
+    "Gli importi delle fatture non pagati alla scadenza saranno riscossi con un interesse di mora del 5% mensile.",
+    "La nostra offerta è valida per merci secche non infiammabili; i carichi infiammabili (ADR) devono esserci notificati in anticipo.",
+    "Per le spedizioni di importazione dalla Norvegia con valore superiore a 35.000 €, verrà applicato un costo aggiuntivo dello 0,07% ai sensi della tassa di garanzia T1.",
+    "Per le spedizioni di importazione, si applica un costo extra di 5 EUR per ogni codice GTIP successivo al terzo."
+  ];
+
   const translations = {
     tr: {
-      nav_home: "Ana Sayfa", nav_services: "Hizmetler", nav_industries: "Sektörler", nav_about: "Kurumsal", nav_comm: "İletişim", nav_contact: "Teklif Al",
+      nav_home: "Ana Sayfa", nav_services: "Hizmetler", nav_industries: "Sektörler", nav_about: "Kurumsal", nav_comm: "İletişim", nav_terms: "Şartname", nav_contact: "Teklif Al",
       hero_title: 'Sınırların Ötesine <br/><span class="highlight">Pentagram Logistics</span> ile Ulaşın',
       hero_desc: "İstanbul ve Roma ofislerimizle, global ticaretteki en güçlü çözüm ortağınızız.",
       hero_cta: "Hemen Teklif Alın",
@@ -126,10 +216,14 @@ function App() {
 
       opt_general: "Genel Kargo", opt_imo: "Tehlikeli Madde (IMO)", opt_perishable: "Bozulabilir / Gıda", opt_bulk: "Dökme Yük",
 
+      terms_title: "Taşımacılık Şartnamesi", terms_subtitle: "Kara Yolu Taşımacılığı",
+      terms_intro: "Değerli müşterimiz, tarafınıza iletilen taşımacılık teklifini onaylamanız halinde aşağıdaki kara yolu taşımacılığı şartnamemizi dikkatle okumanızı rica ederiz.",
+      terms_list: termsListTR,
+
       footer_links: "Hızlı Bağlantılar", footer_legal: "Yasal & Gizlilik", footer_social: "Bizi Takip Edin"
     },
     en: {
-      nav_home: "Home", nav_services: "Services", nav_industries: "Industries", nav_about: "About", nav_comm: "Contact", nav_contact: "Get Quote",
+      nav_home: "Home", nav_services: "Services", nav_industries: "Industries", nav_about: "About", nav_comm: "Contact", nav_terms: "Terms", nav_contact: "Get Quote",
       hero_title: 'Reach Beyond the Borders with <br/><span class="highlight">Pentagram Logistics</span>',
       hero_desc: "Your strongest partner in global trade with our Istanbul and Rome offices.",
       hero_cta: "Get a Quote Now",
@@ -176,10 +270,14 @@ function App() {
 
       opt_general: "General Cargo", opt_imo: "Dangerous Goods (IMO)", opt_perishable: "Perishable / Food", opt_bulk: "Bulk Cargo",
 
+      terms_title: "Transportation Terms & Conditions", terms_subtitle: "Road Freight Transport",
+      terms_intro: "Dear customer, upon approving the freight quote sent to you, please read our road freight transport terms and conditions carefully.",
+      terms_list: termsListEN,
+
       footer_links: "Quick Links", footer_legal: "Legal", footer_social: "Follow Us"
     },
     it: {
-      nav_home: "Home", nav_services: "Servizi", nav_industries: "Settori", nav_about: "Chi Siamo", nav_comm: "Contatto", nav_contact: "Preventivo",
+      nav_home: "Home", nav_services: "Servizi", nav_industries: "Settori", nav_about: "Chi Siamo", nav_comm: "Contatto", nav_terms: "Termini", nav_contact: "Preventivo",
       hero_title: 'Oltrepassa i Confini con <br/><span class="highlight">Pentagram Logistics</span>',
       hero_desc: "Il tuo partner più forte nel commercio globale con i nostri uffici di Istanbul e Roma.",
       hero_cta: "Richiedi Ora",
@@ -226,6 +324,10 @@ function App() {
 
       opt_general: "Carico Generale", opt_imo: "Merci Pericolose (IMO)", opt_perishable: "Deperibile / Cibo", opt_bulk: "Rinfusa",
 
+      terms_title: "Termini e Condizioni di Trasporto", terms_subtitle: "Trasporto Stradale Merci",
+      terms_intro: "Gentile cliente, previa approvazione del preventivo di nolo a voi inviato, vi preghiamo di leggere attentamente i nostri termini e condizioni.",
+      terms_list: termsListIT,
+
       footer_links: "Link Rapidi", footer_legal: "Legale", footer_social: "Seguici"
     }
   };
@@ -234,6 +336,7 @@ function App() {
 
   return (
     <>
+      {/* NAVBAR */}
       <nav className="glass-nav">
         <div className="container nav-container">
           <div className="logo-area">
@@ -244,14 +347,15 @@ function App() {
             </div>
           </div>
           <ul className={`nav-links ${isMenuOpen ? 'active' : ''}`}>
-            <li><a href="#home">{t.nav_home}</a></li>
-            <li><a href="#services">{t.nav_services}</a></li>
-            <li><a href="#industries">{t.nav_industries}</a></li>
-            <li><a href="#about">{t.nav_about}</a></li>
-            <li><a href="#about">{t.nav_comm}</a></li>
-            <li><a href="#quote">{t.nav_contact}</a></li>
+            <li><a href="#home" onClick={(e) => { e.preventDefault(); navigateTo('home', 'home'); }}>{t.nav_home}</a></li>
+            <li><a href="#services" onClick={(e) => { e.preventDefault(); navigateTo('home', 'services'); }}>{t.nav_services}</a></li>
+            <li><a href="#industries" onClick={(e) => { e.preventDefault(); navigateTo('home', 'industries'); }}>{t.nav_industries}</a></li>
+            <li><a href="#about" onClick={(e) => { e.preventDefault(); navigateTo('home', 'about'); }}>{t.nav_about}</a></li>
+            <li><a href="#about" onClick={(e) => { e.preventDefault(); navigateTo('home', 'about'); }}>{t.nav_comm}</a></li>
+            <li><a href="#terms" onClick={(e) => { e.preventDefault(); navigateTo('terms'); }}>{t.nav_terms}</a></li>
+            <li><a href="#quote" className="quote-nav-btn" onClick={(e) => { e.preventDefault(); navigateTo('home', 'quote'); }}>{t.nav_contact}</a></li>
 
-            {/* MOBIL MENÜ DİL SEÇENEĞİ */}
+            {/* MOBIL DİL SEÇENEĞİ */}
             <li className="mobile-lang-wrapper">
               <div className="lang-switch-mobile">
                 <button className={lang === 'tr' ? 'active' : ''} onClick={() => setLang('tr')}>TR</button>
@@ -275,256 +379,276 @@ function App() {
         </div>
       </nav>
 
-      <header id="home" className="hero-section">
-        <div className="logistics-animation">
-          <div className="world-map-bg"></div>
-          <div className="moving-icon plane"><i className="fas fa-plane"></i></div>
-          <div className="moving-icon ship"><i className="fas fa-ship"></i></div>
-          <div className="moving-icon truck"><i className="fas fa-truck"></i></div>
-        </div>
-        <div className="container hero-content-center">
-          <h1 dangerouslySetInnerHTML={{ __html: t.hero_title }}></h1>
-          <p>{t.hero_desc}</p>
-          <a href="#quote" className="hero-btn-pulse">{t.hero_cta}</a>
-        </div>
-      </header>
-
-      {/* MARQUEE */}
-      <section className="marquee-section">
-        <div className="marquee-label">{t.marquee_title}</div>
-        <div className="marquee-wrapper">
-          <div className="marquee-content">
-            {/* GRUP 1 */}
-            <span>🇹🇷 Türkiye</span><span>🇮🇹 İtalya</span><span>🇸🇾 Suriye</span><span>🇮🇶 Irak</span><span>🇮🇷 İran</span><span>🇰🇼 Kuveyt</span><span>🇶🇦 Katar</span>
-            <span>🇩🇪 Almanya</span><span>🇳🇱 Hollanda</span><span>🇫🇷 Fransa</span><span>🇬🇧 İngiltere</span><span>🇪🇸 İspanya</span><span>🇧🇪 Belçika</span>
-            <span>🇦🇹 Avusturya</span><span>🇨🇭 İsviçre</span><span>🇵🇱 Polonya</span><span>🇨🇳 Çin</span><span>🇰🇷 G. Kore</span><span>🇺🇸 ABD</span><span>🇨🇦 Kanada</span>
-            <span>🇯🇵 Japonya</span><span>🇮🇳 Hindistan</span><span>🇪🇬 Mısır</span>
-
-            {/* GRUP 2 (TEKRAR) */}
-            <span>🇹🇷 Türkiye</span><span>🇮🇹 İtalya</span><span>🇸🇾 Suriye</span><span>🇮🇶 Irak</span><span>🇮🇷 İran</span><span>🇰🇼 Kuveyt</span><span>🇶🇦 Katar</span>
-            <span>🇩🇪 Almanya</span><span>🇳🇱 Hollanda</span><span>🇫🇷 Fransa</span><span>🇬🇧 İngiltere</span><span>🇪🇸 İspanya</span><span>🇧🇪 Belçika</span>
-            <span>🇦🇹 Avusturya</span><span>🇨🇭 İsviçre</span><span>🇵🇱 Polonya</span><span>🇨🇳 Çin</span><span>🇰🇷 G. Kore</span><span>🇺🇸 ABD</span><span>🇨🇦 Kanada</span>
-            <span>🇯🇵 Japonya</span><span>🇮🇳 Hindistan</span><span>🇪🇬 Mısır</span>
-          </div>
-        </div>
-      </section>
-
-      <section id="services" className="section-padding">
-        <div className="container">
-          <div className="section-header">
-            <h2>{t.serv_title}</h2>
-            <p>{t.serv_subtitle}</p>
-          </div>
-          <div className="grid-4">
-            {/* YENİ SIRALAMA: KARA - DENİZ - HAVA - PROJE */}
-            <div className="unified-card glass-panel"><i className="fas fa-truck-moving card-icon"></i><h3>{t.serv_road_title}</h3><p>{t.serv_road_desc}</p></div>
-            <div className="unified-card glass-panel"><i className="fas fa-ship card-icon"></i><h3>{t.serv_sea_title}</h3><p>{t.serv_sea_desc}</p></div>
-            <div className="unified-card glass-panel"><i className="fas fa-plane-departure card-icon"></i><h3>{t.serv_air_title}</h3><p>{t.serv_air_desc}</p></div>
-            <div className="unified-card glass-panel"><i className="fas fa-warehouse card-icon"></i><h3>{t.serv_store_title}</h3><p>{t.serv_store_desc}</p></div>
-          </div>
-        </div>
-      </section>
-
-      <section className="process-section section-padding dark-bg">
-        <div className="container">
-          <div className="section-header">
-            <h2>{t.proc_title}</h2>
-            <p>{t.proc_sub}</p>
-          </div>
-          <div className="process-grid">
-            <div className="process-step">
-              <div className="step-number">01</div>
-              <div className="step-icon square-icon"><i className="fas fa-clipboard-check"></i></div>
-              <h4>{t.proc_step1}</h4>
-              <p>{t.proc_desc1}</p>
+      {/* SAYFA YÖNLENDİRMESİ (State Based Routing) */}
+      {currentPage === 'home' ? (
+        <>
+          <header id="home" className="hero-section">
+            <div className="logistics-animation">
+              <div className="world-map-bg"></div>
+              <div className="moving-icon plane"><i className="fas fa-plane"></i></div>
+              <div className="moving-icon ship"><i className="fas fa-ship"></i></div>
+              <div className="moving-icon truck"><i className="fas fa-truck"></i></div>
             </div>
-            <div className="step-arrow"><i className="fas fa-chevron-right"></i></div>
-            <div className="process-step">
-              <div className="step-number">02</div>
-              <div className="step-icon square-icon"><i className="fas fa-box-open"></i></div>
-              <h4>{t.proc_step2}</h4>
-              <p>{t.proc_desc2}</p>
+            <div className="container hero-content-center">
+              <h1 dangerouslySetInnerHTML={{ __html: t.hero_title }}></h1>
+              <p>{t.hero_desc}</p>
+              <a href="#quote" className="hero-btn-pulse" onClick={(e) => { e.preventDefault(); navigateTo('home', 'quote'); }}>{t.hero_cta}</a>
             </div>
-            <div className="step-arrow"><i className="fas fa-chevron-right"></i></div>
-            <div className="process-step">
-              <div className="step-number">03</div>
-              <div className="step-icon square-icon"><i className="fas fa-globe-americas"></i></div>
-              <h4>{t.proc_step3}</h4>
-              <p>{t.proc_desc3}</p>
-            </div>
-            <div className="step-arrow"><i className="fas fa-chevron-right"></i></div>
-            <div className="process-step">
-              <div className="step-number">04</div>
-              <div className="step-icon square-icon"><i className="fas fa-flag-checkered"></i></div>
-              <h4>{t.proc_step4}</h4>
-              <p>{t.proc_desc4}</p>
-            </div>
-          </div>
-        </div>
-      </section>
+          </header>
 
-      <section id="industries" className="section-padding">
-        <div className="container">
-          <div className="header-spacer"><h2 className="section-title-left">{t.ind_title}</h2></div>
-          <div className="grid-4">
-            <div className="unified-card glass-panel"><i className="fas fa-anchor card-icon"></i><h3>{t.ind_ship_title}</h3><p>{t.ind_ship_desc}</p></div>
-            <div className="unified-card glass-panel"><i className="fas fa-hard-hat card-icon"></i><h3>{t.ind_steel_title}</h3><p>{t.ind_steel_desc}</p></div>
-            <div className="unified-card glass-panel"><i className="fas fa-burn card-icon"></i><h3>{t.ind_auto_title}</h3><p>{t.ind_auto_desc}</p></div>
-            <div className="unified-card glass-panel"><i className="fas fa-cogs card-icon"></i><h3>{t.ind_pharma_title}</h3><p>{t.ind_pharma_desc}</p></div>
-          </div>
-        </div>
-      </section>
+          <section className="marquee-section">
+            <div className="marquee-label">{t.marquee_title}</div>
+            <div className="marquee-wrapper">
+              <div className="marquee-content">
+                {/* GRUP 1 */}
+                <span>🇹🇷 Türkiye</span><span>🇮🇹 İtalya</span>
+                <span>🇩🇪 Almanya</span><span>🇳🇱 Hollanda</span><span>🇫🇷 Fransa</span><span>🇬🇧 İngiltere</span><span>🇪🇸 İspanya</span><span>🇧🇪 Belçika</span><span>🇨🇭 İsviçre</span><span>🇵🇱 Polonya</span>
+                <span>🇸🇾 Suriye</span><span>🇮🇶 Irak</span><span>🇮🇷 İran</span><span>🇰🇼 Kuveyt</span><span>🇶🇦 Katar</span>
+                <span>🇨🇳 Çin</span><span>🇰🇷 G. Kore</span><span>🇺🇸 ABD</span><span>🇨🇦 Kanada</span><span>🇯🇵 Japonya</span><span>🇮🇳 Hindistan</span><span>🇪🇬 Mısır</span>
 
-      <section className="sustainability-section">
-        <div className="container">
-          <div className="sustain-wrapper glass-panel">
-            <div className="sustain-content">
-              <div className="sustain-badge">{t.sus_badge}</div>
-              <h2>{t.sus_title}</h2>
-              <p>{t.sus_text}</p>
-            </div>
-            <div className="sustain-icon"><i className="fas fa-handshake"></i></div>
-          </div>
-        </div>
-      </section>
-
-      <section id="about" className="section-padding">
-        <div className="container about-layout">
-          <div className="about-left-col">
-            <div className="about-text glass-panel">
-              <h3>{t.about_title}</h3>
-              <p dangerouslySetInnerHTML={{ __html: t.about_text }}></p>
-            </div>
-            <div className="contact-details-box glass-panel mt-4">
-              <div className="contact-row">
-                <div className="icon-box"><i className="fas fa-building"></i></div>
-                <div><h5>{t.contact_hq_title}</h5><p>{t.contact_hq_addr}</p><p className="contact-phone">{t.contact_hq_phone}</p></div>
-              </div>
-              <div className="divider"></div>
-              <div className="contact-row">
-                <div className="icon-box"><i className="fas fa-globe-europe"></i></div>
-                <div><h5>{t.contact_branch_title}</h5><p>{t.contact_branch_addr}</p><p className="contact-phone">{t.contact_branch_phone}</p></div>
+                {/* GRUP 2 (TEKRAR) */}
+                <span>🇹🇷 Türkiye</span><span>🇮🇹 İtalya</span>
+                <span>🇩🇪 Almanya</span><span>🇳🇱 Hollanda</span><span>🇫🇷 Fransa</span><span>🇬🇧 İngiltere</span><span>🇪🇸 İspanya</span><span>🇧🇪 Belçika</span><span>🇨🇭 İsviçre</span><span>🇵🇱 Polonya</span>
+                <span>🇸🇾 Suriye</span><span>🇮🇶 Irak</span><span>🇮🇷 İran</span><span>🇰🇼 Kuveyt</span><span>🇶🇦 Katar</span>
+                <span>🇨🇳 Çin</span><span>🇰🇷 G. Kore</span><span>🇺🇸 ABD</span><span>🇨🇦 Kanada</span><span>🇯🇵 Japonya</span><span>🇮🇳 Hindistan</span><span>🇪🇬 Mısır</span>
               </div>
             </div>
-          </div>
-          <a href="https://www.google.com/maps/place//data=!4m2!3m1!1s0x14caa3b2660a53a1:0xe8000ecfba8225a9?sa=X&ved=1t:8290&ictx=111" target="_blank" rel="noopener noreferrer" className="map-link-wrapper">
-            <div className="about-visual glass-panel">
-              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3016.307574864766!2d29.1894443156546!3d40.88944447931296!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14cac504067888c7%3A0x1247076922485636!2sIstmarina%20AVM!5e0!3m2!1str!2str!4v1675123456789!5m2!1str!2str" width="100%" height="100%" style={{ border: 0, filter: 'invert(90%) hue-rotate(180deg)' }} allowFullScreen="" loading="lazy" title="Pentagram Location"></iframe>
-              <div className="map-overlay-label"><i className="fas fa-map-marker-alt"></i> <span>HQ: Kartal / İstanbul</span></div>
+          </section>
+
+          <section id="services" className="section-padding">
+            <div className="container">
+              <div className="section-header">
+                <h2>{t.serv_title}</h2>
+                <p>{t.serv_subtitle}</p>
+              </div>
+              <div className="grid-4">
+                <div className="unified-card glass-panel"><i className="fas fa-truck-moving card-icon"></i><h3>{t.serv_road_title}</h3><p>{t.serv_road_desc}</p></div>
+                <div className="unified-card glass-panel"><i className="fas fa-ship card-icon"></i><h3>{t.serv_sea_title}</h3><p>{t.serv_sea_desc}</p></div>
+                <div className="unified-card glass-panel"><i className="fas fa-plane-departure card-icon"></i><h3>{t.serv_air_title}</h3><p>{t.serv_air_desc}</p></div>
+                <div className="unified-card glass-panel"><i className="fas fa-warehouse card-icon"></i><h3>{t.serv_store_title}</h3><p>{t.serv_store_desc}</p></div>
+              </div>
             </div>
-          </a>
-        </div>
-      </section>
+          </section>
 
-      <section id="quote" className="quote-section">
-        <div className="container">
-          <div className="quote-wrapper glass-panel">
-            <div className="quote-header"><h2>{t.form_heading}</h2><p>{t.form_sub}</p></div>
-            <form className="big-form" onSubmit={handleSubmit}>
-              <div className="form-row">
-                <div className="input-group"><label>{t.lbl_company}</label><input type="text" name="company" required /></div>
-                <div className="input-group"><label>{t.lbl_email}</label><input type="email" name="email" required /></div>
-                <div className="input-group"><label>{t.lbl_phone}</label><input type="tel" name="phone" required /></div>
+          <section className="process-section section-padding dark-bg">
+            <div className="container">
+              <div className="section-header">
+                <h2>{t.proc_title}</h2>
+                <p>{t.proc_sub}</p>
               </div>
-              <div className="form-row">
-                <div className="input-group"><label>{t.lbl_origin}</label><input type="text" name="origin" required /></div>
-                <div className="input-group"><label>{t.lbl_dest}</label><input type="text" name="dest" required /></div>
-              </div>
-
-              <div className="form-row">
-                <div className="input-group">
-                  <label>{t.lbl_mode}</label>
-                  <select name="mode" value={transportMode} onChange={(e) => setTransportMode(e.target.value)}>
-                    <option value="road">{t.opt_road}</option>
-                    <option value="sea">{t.opt_sea}</option>
-                    <option value="air">{t.opt_air}</option>
-                  </select>
+              <div className="process-grid">
+                <div className="process-step">
+                  <div className="step-number">01</div>
+                  <div className="step-icon square-icon"><i className="fas fa-clipboard-check"></i></div>
+                  <h4>{t.proc_step1}</h4>
+                  <p>{t.proc_desc1}</p>
                 </div>
-                <div className="input-group">
-                  <label>{t.lbl_vehicle}</label>
-                  <select name="vehicle">
-                    {vehicleOptions[transportMode].map((optKey) => (
-                      <option key={optKey} value={t[optKey]}>{t[optKey]}</option>
-                    ))}
-                  </select>
+                <div className="step-arrow"><i className="fas fa-chevron-right"></i></div>
+                <div className="process-step">
+                  <div className="step-number">02</div>
+                  <div className="step-icon square-icon"><i className="fas fa-box-open"></i></div>
+                  <h4>{t.proc_step2}</h4>
+                  <p>{t.proc_desc2}</p>
                 </div>
-                <div className="input-group">
-                  <label>{t.lbl_cargo_type}</label>
-                  <select name="cargoType">
-                    <option value={t.opt_general}>{t.opt_general}</option>
-                    <option value={t.opt_imo}>{t.opt_imo}</option>
-                    <option value={t.opt_perishable}>{t.opt_perishable}</option>
-                    <option value={t.opt_bulk}>{t.opt_bulk}</option>
-                  </select>
+                <div className="step-arrow"><i className="fas fa-chevron-right"></i></div>
+                <div className="process-step">
+                  <div className="step-number">03</div>
+                  <div className="step-icon square-icon"><i className="fas fa-globe-americas"></i></div>
+                  <h4>{t.proc_step3}</h4>
+                  <p>{t.proc_desc3}</p>
+                </div>
+                <div className="step-arrow"><i className="fas fa-chevron-right"></i></div>
+                <div className="process-step">
+                  <div className="step-number">04</div>
+                  <div className="step-icon square-icon"><i className="fas fa-flag-checkered"></i></div>
+                  <h4>{t.proc_step4}</h4>
+                  <p>{t.proc_desc4}</p>
                 </div>
               </div>
+            </div>
+          </section>
 
-              <div className="cargo-builder">
-                <div className="form-row four-col">
-                  <div className="input-group"><label>{t.lbl_dims}</label><input type="text" placeholder="120x80x100" value={currentCargo.dims} onChange={(e) => setCurrentCargo({ ...currentCargo, dims: e.target.value })} /></div>
-                  <div className="input-group"><label>{t.lbl_weight}</label><input type="number" placeholder="kg" value={currentCargo.weight} onChange={(e) => setCurrentCargo({ ...currentCargo, weight: e.target.value })} /></div>
-                  <div className="input-group"><label>{t.lbl_palette}</label><input type="number" placeholder={t.lbl_palette_ph} value={currentCargo.count} onChange={(e) => setCurrentCargo({ ...currentCargo, count: e.target.value })} /></div>
-                  <div className="input-group"><label>{t.lbl_stack}</label><select value={currentCargo.stack} onChange={(e) => setCurrentCargo({ ...currentCargo, stack: e.target.value })}><option>{t.opt_yes}</option><option>{t.opt_no}</option></select></div>
-                </div>
-                <button type="button" className="add-btn" onClick={addCargo}>{t.btn_add}</button>
+          <section id="industries" className="section-padding">
+            <div className="container">
+              <div className="header-spacer"><h2 className="section-title-left">{t.ind_title}</h2></div>
+              <div className="grid-4">
+                <div className="unified-card glass-panel"><i className="fas fa-anchor card-icon"></i><h3>{t.ind_ship_title}</h3><p>{t.ind_ship_desc}</p></div>
+                <div className="unified-card glass-panel"><i className="fas fa-hard-hat card-icon"></i><h3>{t.ind_steel_title}</h3><p>{t.ind_steel_desc}</p></div>
+                <div className="unified-card glass-panel"><i className="fas fa-burn card-icon"></i><h3>{t.ind_auto_title}</h3><p>{t.ind_auto_desc}</p></div>
+                <div className="unified-card glass-panel"><i className="fas fa-cogs card-icon"></i><h3>{t.ind_pharma_title}</h3><p>{t.ind_pharma_desc}</p></div>
               </div>
+            </div>
+          </section>
 
-              {cargoList.length > 0 && (
-                <div className="cargo-list-display">
-                  {cargoList.map((item, index) => (
-                    <div key={index} className="cargo-item">
-                      <span>{index + 1}. Palet: {item.dims} cm - {item.weight} kg - {item.count} Adet - İstif: {item.stack}</span>
-                      <span className="remove-item" onClick={() => removeCargo(index)}>✖</span>
-                    </div>
-                  ))}
+          <section className="sustainability-section">
+            <div className="container">
+              <div className="sustain-wrapper glass-panel">
+                <div className="sustain-content">
+                  <div className="sustain-badge">{t.sus_badge}</div>
+                  <h2>{t.sus_title}</h2>
+                  <p>{t.sus_text}</p>
                 </div>
-              )}
+                <div className="sustain-icon"><i className="fas fa-handshake"></i></div>
+              </div>
+            </div>
+          </section>
 
-              <div className="form-row-full"><div className="input-group"><label>{t.lbl_note}</label><textarea name="note" rows="4"></textarea></div></div>
-
-              <div className="form-row-full">
-                <div className="input-group">
-                  <label>{t.lbl_file}</label>
-                  <div className="custom-file-wrapper">
-                    <label htmlFor="file-upload" className="custom-file-button">
-                      {fileName || t.btn_file_select} <i className="fas fa-upload" style={{ marginLeft: '10px' }}></i>
-                    </label>
-                    <input id="file-upload" type="file" onChange={handleFileChange} style={{ display: 'none' }} />
+          <section id="about" className="section-padding">
+            <div className="container about-layout">
+              <div className="about-left-col">
+                <div className="about-text glass-panel">
+                  <h3>{t.about_title}</h3>
+                  <p dangerouslySetInnerHTML={{ __html: t.about_text }}></p>
+                </div>
+                <div className="contact-details-box glass-panel mt-4">
+                  <div className="contact-row">
+                    <div className="icon-box"><i className="fas fa-building"></i></div>
+                    <div><h5>{t.contact_hq_title}</h5><p>{t.contact_hq_addr}</p><p className="contact-phone">{t.contact_hq_phone}</p></div>
+                  </div>
+                  <div className="divider"></div>
+                  <div className="contact-row">
+                    <div className="icon-box"><i className="fas fa-globe-europe"></i></div>
+                    <div><h5>{t.contact_branch_title}</h5><p>{t.contact_branch_addr}</p><p className="contact-phone">{t.contact_branch_phone}</p></div>
                   </div>
                 </div>
               </div>
+              <a href="https://www.google.com/maps/place//data=!4m2!3m1!1s0x14caa3b2660a53a1:0xe8000ecfba8225a9?sa=X&ved=1t:8290&ictx=111" target="_blank" rel="noopener noreferrer" className="map-link-wrapper">
+                <div className="about-visual glass-panel">
+                  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3016.307574864766!2d29.1894443156546!3d40.88944447931296!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14cac504067888c7%3A0x1247076922485636!2sIstmarina%20AVM!5e0!3m2!1str!2str!4v1675123456789!5m2!1str!2str" width="100%" height="100%" style={{ border: 0, filter: 'invert(90%) hue-rotate(180deg)' }} allowFullScreen="" loading="lazy" title="Pentagram Location"></iframe>
+                  <div className="map-overlay-label"><i className="fas fa-map-marker-alt"></i> <span>HQ: Kartal / İstanbul</span></div>
+                </div>
+              </a>
+            </div>
+          </section>
 
-              <button type="submit" className="submit-btn-large">{t.btn_submit}</button>
-            </form>
+          <section id="quote" className="quote-section">
+            <div className="container">
+              <div className="quote-wrapper glass-panel">
+                <div className="quote-header"><h2>{t.form_heading}</h2><p>{t.form_sub}</p></div>
+                <form className="big-form" onSubmit={handleSubmit}>
+                  <div className="form-row">
+                    <div className="input-group"><label>{t.lbl_company}</label><input type="text" name="company" required /></div>
+                    <div className="input-group"><label>{t.lbl_email}</label><input type="email" name="email" required /></div>
+                    <div className="input-group"><label>{t.lbl_phone}</label><input type="tel" name="phone" required /></div>
+                  </div>
+                  <div className="form-row">
+                    <div className="input-group"><label>{t.lbl_origin}</label><input type="text" name="origin" required /></div>
+                    <div className="input-group"><label>{t.lbl_dest}</label><input type="text" name="dest" required /></div>
+                  </div>
+
+                  <div className="form-row">
+                    <div className="input-group">
+                      <label>{t.lbl_mode}</label>
+                      <select name="mode" value={transportMode} onChange={(e) => setTransportMode(e.target.value)}>
+                        <option value="road">{t.opt_road}</option>
+                        <option value="sea">{t.opt_sea}</option>
+                        <option value="air">{t.opt_air}</option>
+                      </select>
+                    </div>
+                    <div className="input-group">
+                      <label>{t.lbl_vehicle}</label>
+                      <select name="vehicle">
+                        {vehicleOptions[transportMode].map((optKey) => (
+                          <option key={optKey} value={t[optKey]}>{t[optKey]}</option>
+                        ))}
+                      </select>
+                    </div>
+                    <div className="input-group">
+                      <label>{t.lbl_cargo_type}</label>
+                      <select name="cargoType">
+                        <option value={t.opt_general}>{t.opt_general}</option>
+                        <option value={t.opt_imo}>{t.opt_imo}</option>
+                        <option value={t.opt_perishable}>{t.opt_perishable}</option>
+                        <option value={t.opt_bulk}>{t.opt_bulk}</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div className="cargo-builder">
+                    <div className="form-row four-col">
+                      <div className="input-group"><label>{t.lbl_dims}</label><input type="text" placeholder="120x80x100" value={currentCargo.dims} onChange={(e) => setCurrentCargo({ ...currentCargo, dims: e.target.value })} /></div>
+                      <div className="input-group"><label>{t.lbl_weight}</label><input type="number" placeholder="kg" value={currentCargo.weight} onChange={(e) => setCurrentCargo({ ...currentCargo, weight: e.target.value })} /></div>
+                      <div className="input-group"><label>{t.lbl_palette}</label><input type="number" placeholder={t.lbl_palette_ph} value={currentCargo.count} onChange={(e) => setCurrentCargo({ ...currentCargo, count: e.target.value })} /></div>
+                      <div className="input-group"><label>{t.lbl_stack}</label><select value={currentCargo.stack} onChange={(e) => setCurrentCargo({ ...currentCargo, stack: e.target.value })}><option>{t.opt_yes}</option><option>{t.opt_no}</option></select></div>
+                    </div>
+                    <button type="button" className="add-btn" onClick={addCargo}>{t.btn_add}</button>
+                  </div>
+
+                  {cargoList.length > 0 && (
+                    <div className="cargo-list-display">
+                      {cargoList.map((item, index) => (
+                        <div key={index} className="cargo-item">
+                          <span>{index + 1}. Palet: {item.dims} cm - {item.weight} kg - {item.count} {t.lbl_palette_ph} - İstif: {item.stack}</span>
+                          <span className="remove-item" onClick={() => removeCargo(index)}>✖</span>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+
+                  <div className="form-row-full"><div className="input-group"><label>{t.lbl_note}</label><textarea name="note" rows="4"></textarea></div></div>
+
+                  <div className="form-row-full">
+                    <div className="input-group">
+                      <label>{t.lbl_file}</label>
+                      <div className="custom-file-wrapper">
+                        <label htmlFor="file-upload" className="custom-file-button">
+                          {fileName || t.btn_file_select} <i className="fas fa-upload" style={{ marginLeft: '10px' }}></i>
+                        </label>
+                        <input id="file-upload" type="file" onChange={handleFileChange} style={{ display: 'none' }} />
+                      </div>
+                    </div>
+                  </div>
+
+                  <button type="submit" className="submit-btn-large">{t.btn_submit}</button>
+                </form>
+              </div>
+            </div>
+          </section>
+        </>
+      ) : (
+        /* YENİ ŞARTNAME (TERMS) SAYFASI */
+        <div className="terms-page section-padding">
+          <div className="container">
+            <div className="terms-content glass-panel">
+              <h2>{t.terms_title}</h2>
+              <h3>{t.terms_subtitle}</h3>
+              <p>{t.terms_intro}</p>
+              <ul className="terms-list">
+                {t.terms_list.map((item, index) => (
+                  <li key={index} dangerouslySetInnerHTML={{ __html: index === 0 ? `<strong>${item}</strong>` : item }}></li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
-      </section>
+      )}
 
+      {/* FOOTER */}
       <footer className="footer-section">
         <div className="container">
           <div className="footer-grid">
             <div className="footer-col">
               <h4>PENTAGRAM</h4>
-              <p>HQ: İSTMarina, Kartal / İstanbul</p>
+              <p>HQ: İSTMarina - Kartal - İstanbul / Türkiye</p>
               <p>Branch: Via Nazionale, Roma / Italia</p>
               <p>Email: sales@pentagramlogistics.com</p>
             </div>
             <div className="footer-col">
               <h4>{t.footer_links}</h4>
               <ul>
-                <li><a href="#services">{t.nav_services}</a></li>
-                <li><a href="#industries">{t.nav_industries}</a></li>
-                <li><a href="#about">{t.nav_about}</a></li>
-                <li><a href="#quote">{t.nav_contact}</a></li>
+                <li><a href="#services" onClick={(e) => { e.preventDefault(); navigateTo('home', 'services'); }}>{t.nav_services}</a></li>
+                <li><a href="#industries" onClick={(e) => { e.preventDefault(); navigateTo('home', 'industries'); }}>{t.nav_industries}</a></li>
+                <li><a href="#about" onClick={(e) => { e.preventDefault(); navigateTo('home', 'about'); }}>{t.nav_about}</a></li>
+                <li><a href="#quote" onClick={(e) => { e.preventDefault(); navigateTo('home', 'quote'); }}>{t.nav_contact}</a></li>
               </ul>
             </div>
             <div className="footer-col">
               <h4>{t.footer_legal}</h4>
               <ul>
+                <li><a href="#terms" onClick={(e) => { e.preventDefault(); navigateTo('terms'); }}>{t.nav_terms}</a></li>
                 <li><a href="#">Privacy Policy</a></li>
                 <li><a href="#">Terms of Service</a></li>
                 <li><a href="#">Compliance</a></li>
-                <li><a href="#">Cookies</a></li>
               </ul>
             </div>
           </div>
