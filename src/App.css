@@ -1132,7 +1132,7 @@ textarea {
     margin-bottom: 20px;
   }
 
-  /* MARQUEE MOBIL DÜZENLEME (Artık çok yer kaplamayacak) */
+  /* MARQUEE MOBIL DÜZENLEME */
   .marquee-section {
     flex-direction: column;
     align-items: flex-start;
@@ -1140,7 +1140,7 @@ textarea {
   }
 
   .marquee-label {
-    font-size: 0.75rem;
+    font-size: 0.8rem;
     padding: 5px 15px;
     letter-spacing: 1px;
     border-right: none;

@@ -108,9 +108,7 @@ function App() {
     "Bu teklif kapsamında yapılan taşımalardan doğabilecek ihtilaflarda İstanbul mahkemeleri ve icra daireleri yetkilidir.",
     "Faturalarımız döviz olarak kesilir ve döviz olarak vadesinde tahsil edilir.",
     "Vadesinde ödenmeyen fatura tutarlar, döviz üzerinden aylık %5 gecikme faiziyle birlikte tahsil edilecektir.",
-    "Teklifimiz yanıcılı olmayan kuru yükler için geçerli olup, taşınmasına müsaade edilen yanıcı sınıfındaki (ADR) yüklerin, firmamıza önceden bildirilmesi gerekmektedir, bununla birlikte navlun farkı oluşacaktır.",
-    "İthalat yönünde Norveç’ten gerçekleşen ve mal bedeli 35.000 € üzerindeki yüklemelerinizde T1 garanti ücreti kapsamında 7 ‱ (On binde) ek masraf oluşacaktır.",
-    "İthalat yüklemelerinde 3 GTIP kodundan sonra GTIP kodu başına 5 EUR ekstra masraf oluşmaktadır."
+    "Teklifimiz yanıcılı olmayan kuru yükler için geçerli olup, taşınmasına müsaade edilen yanıcı sınıfındaki (ADR) yüklerin, firmamıza önceden bildirilmesi gerekmektedir, bununla birlikte navlun farkı oluşacaktır."
   ];
 
   const termsListEN = [
@@ -130,9 +128,7 @@ function App() {
     "Istanbul courts and enforcement offices are authorized for disputes arising from transports under this proposal.",
     "Our invoices are issued in foreign currency and collected in foreign currency upon maturity.",
     "Invoice amounts not paid at maturity will be collected with a 5% monthly delay interest on the foreign currency.",
-    "Our offer is valid for non-flammable dry cargo; permitted flammable (ADR) loads must be notified to us in advance, and a freight difference will apply.",
-    "For import shipments from Norway with a value over €35,000, an additional 0.07% cost will apply under the T1 guarantee fee.",
-    "For import shipments, an extra cost of 5 EUR per GTIP code applies after the 3rd GTIP code."
+    "Our offer is valid for non-flammable dry cargo; permitted flammable (ADR) loads must be notified to us in advance, and a freight difference will apply."
   ];
 
   const termsListIT = [
@@ -152,9 +148,7 @@ function App() {
     "I tribunali e gli uffici di esecuzione di Istanbul sono competenti per le controversie derivanti dai trasporti previsti in questa proposta.",
     "Le nostre fatture sono emesse in valuta estera e riscosse in valuta estera alla scadenza.",
     "Gli importi delle fatture non pagati alla scadenza saranno riscossi con un interesse di mora del 5% mensile.",
-    "La nostra offerta è valida per merci secche non infiammabili; i carichi infiammabili (ADR) devono esserci notificati in anticipo.",
-    "Per le spedizioni di importazione dalla Norvegia con valore superiore a 35.000 €, verrà applicato un costo aggiuntivo dello 0,07% ai sensi della tassa di garanzia T1.",
-    "Per le spedizioni di importazione, si applica un costo extra di 5 EUR per ogni codice GTIP successivo al terzo."
+    "La nostra offerta è valida per merci secche non infiammabili; i carichi infiammabili (ADR) devono esserci notificati in anticipo."
   ];
 
   const translations = {
