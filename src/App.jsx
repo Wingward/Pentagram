@@ -2,6 +2,13 @@ import { useState } from 'react';
 import './App.css';
 import logoImg from './logo.png';
 
+// --- GÖRSELLER ---
+import imgSteel from './img-steel.jpg';
+import imgBoatShip from './img-boat-ship.jpg';
+import imgBoatTruck from './img-boat-truck.jpg';
+import imgPentaTruck from './img-penta-truck.jpg';
+import imgOversized from './img-oversized.jpg';
+
 function App() {
   const [lang, setLang] = useState('tr');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -153,7 +160,9 @@ function App() {
 
   const translations = {
     tr: {
-      nav_home: "Ana Sayfa", nav_services: "Hizmetler", nav_industries: "Sektörler", nav_about: "Kurumsal", nav_comm: "İletişim", nav_terms: "Şartname", nav_contact: "Teklif Al",
+      nav_home: "Ana Sayfa", nav_services: "Hizmetler", nav_industries: "Sektörler", nav_about: "Kurumsal",
+      nav_gallery: "Operasyonlarımız", // EKLENDİ
+      nav_comm: "İletişim", nav_terms: "Şartname", nav_contact: "Teklif Al",
       hero_title: 'Sınırların Ötesine <br/><span class="highlight">Pentagram Logistics</span> ile Ulaşın',
       hero_desc: "İstanbul ve Roma ofislerimizle, global ticaretteki en güçlü çözüm ortağınızız.",
       hero_cta: "Hemen Teklif Alın",
@@ -183,6 +192,9 @@ function App() {
       ind_steel_title: "Demir & Çelik", ind_steel_desc: "Ağır tonajlı rulolar, borular ve sac levhalar için özel dorseler ve 'Heavy Lift' ekipmanları kullanıyoruz. Yük güvenliği için sertifikalı lashing hizmeti sağlıyoruz.",
       ind_auto_title: "Yanıcı Maddeler", ind_auto_desc: "Kimya ve endüstriyel üretimde kullanılan yanıcı, parlayıcı ve tehlikeli maddelerin (IMO/ADR) uluslararası regülasyonlara tam uyumlu ve sertifikalı olarak taşınmasında uzmanız.",
       ind_pharma_title: "Yedek Parça", ind_pharma_desc: "Fabrikaların ve üretim hatlarının durmaması için hayati öneme sahip yedek parçaları, 'zaman kritik' hassasiyetle ve ekspres çözümlerle dünyanın her noktasına ulaştırıyoruz.",
+
+      gallery_title: "Sahadan Kareler", // EKLENDİ
+      gallery_subtitle: "Proje, ağır tonaj ve global taşımacılık operasyonlarımızdan bazıları.", // EKLENDİ
 
       sus_title: "Sarsılmaz Güven ve Şeffaflık",
       sus_text: "Pentagram Logistics olarak işimizin merkezine 'Güven'i koyuyoruz. Şeffaf süreç yönetimimiz, ulaşılabilir uzman ekibimiz ve verdiğimiz sözleri tutma konusundaki hassasiyetimizle, yükünüzü değil işinizi sahipleniyoruz. Sürpriz maliyetler yok, sadece planlandığı gibi işleyen kusursuz bir süreç var.",
@@ -217,7 +229,9 @@ function App() {
       footer_links: "Hızlı Bağlantılar", footer_legal: "Yasal & Gizlilik", footer_social: "Bizi Takip Edin"
     },
     en: {
-      nav_home: "Home", nav_services: "Services", nav_industries: "Industries", nav_about: "About", nav_comm: "Contact", nav_terms: "Terms", nav_contact: "Get Quote",
+      nav_home: "Home", nav_services: "Services", nav_industries: "Industries", nav_about: "About",
+      nav_gallery: "Our Operations", // EKLENDİ
+      nav_comm: "Contact", nav_terms: "Terms", nav_contact: "Get Quote",
       hero_title: 'Reach Beyond the Borders with <br/><span class="highlight">Pentagram Logistics</span>',
       hero_desc: "Your strongest partner in global trade with our Istanbul and Rome offices.",
       hero_cta: "Get a Quote Now",
@@ -240,6 +254,9 @@ function App() {
       ind_steel_title: "Iron & Steel", ind_steel_desc: "We use special trailers and 'Heavy Lift' equipment for heavy coils, pipes, and sheets. We provide certified lashing services for cargo safety.",
       ind_auto_title: "Dangerous Goods", ind_auto_desc: "We are experts in the transport of flammable, combustible, and dangerous goods (IMO/ADR) used in chemical and industrial production, fully compliant with international regulations.",
       ind_pharma_title: "Spare Parts", ind_pharma_desc: "We deliver vital spare parts to prevent factory stoppages to any point in the world with 'time-critical' precision and express solutions.",
+
+      gallery_title: "Operations Gallery", // EKLENDİ
+      gallery_subtitle: "Some of our project, heavy lift and global transport operations.", // EKLENDİ
 
       sus_title: "Unshakable Trust", sus_text: "At Pentagram Logistics, we put 'Trust' at the center of our business. With our transparent process management and accessible expert team, we own your business, not just your cargo. No surprise costs, just a flawless process.", sus_badge: "Reliable Partner",
 
@@ -271,7 +288,9 @@ function App() {
       footer_links: "Quick Links", footer_legal: "Legal", footer_social: "Follow Us"
     },
     it: {
-      nav_home: "Home", nav_services: "Servizi", nav_industries: "Settori", nav_about: "Chi Siamo", nav_comm: "Contatto", nav_terms: "Termini", nav_contact: "Preventivo",
+      nav_home: "Home", nav_services: "Servizi", nav_industries: "Settori", nav_about: "Chi Siamo",
+      nav_gallery: "Operazioni", // EKLENDİ
+      nav_comm: "Contatto", nav_terms: "Termini", nav_contact: "Preventivo",
       hero_title: 'Oltrepassa i Confini con <br/><span class="highlight">Pentagram Logistics</span>',
       hero_desc: "Il tuo partner più forte nel commercio globale con i nostri uffici di Istanbul e Roma.",
       hero_cta: "Richiedi Ora",
@@ -294,6 +313,9 @@ function App() {
       ind_steel_title: "Ferro e Acciaio", ind_steel_desc: "Utilizziamo rimorchi speciali per bobine e attrezzature 'Heavy Lift'. Forniamo servizi di lashing certificati per la sicurezza del carico.",
       ind_auto_title: "Merci Pericolose", ind_auto_desc: "Siamo esperti nel trasporto di merci infiammabili e pericolose (IMO/ADR) utilizzate nella produzione chimica e industriale, in conformità con le normative internazionali.",
       ind_pharma_title: "Pezzi di Ricambio", ind_pharma_desc: "Consegniamo pezzi di ricambio vitali per macchinari in qualsiasi punto del mondo con precisione 'time-critical' e soluzioni espresse.",
+
+      gallery_title: "Galleria Operativa", // EKLENDİ
+      gallery_subtitle: "Alcune delle nostre operazioni di progetto e trasporti globali.", // EKLENDİ
 
       sus_title: "Fiducia Incrollabile", sus_text: "In Pentagram Logistics, mettiamo la 'Fiducia' al centro. Con la nostra gestione trasparente, facciamo nostro il tuo business. Nessun costo a sorpresa, solo un processo impeccabile.", sus_badge: "Partner Affidabile",
 
@@ -345,7 +367,8 @@ function App() {
             <li><a href="#services" onClick={(e) => { e.preventDefault(); navigateTo('home', 'services'); }}>{t.nav_services}</a></li>
             <li><a href="#industries" onClick={(e) => { e.preventDefault(); navigateTo('home', 'industries'); }}>{t.nav_industries}</a></li>
             <li><a href="#about" onClick={(e) => { e.preventDefault(); navigateTo('home', 'about'); }}>{t.nav_about}</a></li>
-            <li><a href="#about" onClick={(e) => { e.preventDefault(); navigateTo('home', 'about'); }}>{t.nav_comm}</a></li>
+            {/* GALERİ LİNKİ EKLENDİ */}
+            <li><a href="#gallery" onClick={(e) => { e.preventDefault(); navigateTo('home', 'gallery'); }}>{t.nav_gallery}</a></li>
             <li><a href="#terms" onClick={(e) => { e.preventDefault(); navigateTo('terms'); }}>{t.nav_terms}</a></li>
             <li><a href="#quote" className="quote-nav-btn" onClick={(e) => { e.preventDefault(); navigateTo('home', 'quote'); }}>{t.nav_contact}</a></li>
 
@@ -470,6 +493,48 @@ function App() {
                 <div className="unified-card glass-panel"><i className="fas fa-hard-hat card-icon"></i><h3>{t.ind_steel_title}</h3><p>{t.ind_steel_desc}</p></div>
                 <div className="unified-card glass-panel"><i className="fas fa-burn card-icon"></i><h3>{t.ind_auto_title}</h3><p>{t.ind_auto_desc}</p></div>
                 <div className="unified-card glass-panel"><i className="fas fa-cogs card-icon"></i><h3>{t.ind_pharma_title}</h3><p>{t.ind_pharma_desc}</p></div>
+              </div>
+            </div>
+          </section>
+
+          {/* --- YENİ EKLENEN GALERİ BÖLÜMÜ --- */}
+          <section id="gallery" className="section-padding">
+            <div className="container">
+              <div className="section-header">
+                <h2>{t.gallery_title}</h2>
+                <p>{t.gallery_subtitle}</p>
+              </div>
+
+              <div className="gallery-grid">
+                {/* 1. Pentagram Logolu Araç */}
+                <div className="gallery-item glass-panel">
+                  <img src={imgPentaTruck} alt="Pentagram Logistics Truck" className="gallery-img" />
+                  <div className="gallery-overlay"><span>Özmal Araç Filomuz</span></div>
+                </div>
+
+                {/* 2. Rulo Sac / Gemi Yüklemesi */}
+                <div className="gallery-item glass-panel">
+                  <img src={imgSteel} alt="Steel Coils Loading" className="gallery-img" />
+                  <div className="gallery-overlay"><span>Ağır Tonaj Gemi Yükleme Operasyonu</span></div>
+                </div>
+
+                {/* 3. Ambulans Tekne / Gemi Üstü */}
+                <div className="gallery-item glass-panel">
+                  <img src={imgBoatShip} alt="Boat on Ship" className="gallery-img" />
+                  <div className="gallery-overlay"><span>Proje Kargo - Deniz Yolu Transferi</span></div>
+                </div>
+
+                {/* 4. Tekne / Kamyon Üstü Flatrack */}
+                <div className="gallery-item glass-panel">
+                  <img src={imgBoatTruck} alt="Boat on Flatbed" className="gallery-img" />
+                  <div className="gallery-overlay"><span>Proje Kargo - Gabari Dışı Karayolu Transferi</span></div>
+                </div>
+
+                {/* 5. Büyük Kutu / Lowbed */}
+                <div className="gallery-item glass-panel">
+                  <img src={imgOversized} alt="Oversized Cargo on Lowbed" className="gallery-img" />
+                  <div className="gallery-overlay"><span>Endüstriyel Ekipman & Lowbed Taşımacılığı</span></div>
+                </div>
               </div>
             </div>
           </section>
