@@ -6,7 +6,7 @@ import logoImg from './logo.png';
 import imgSteel from './img-steel.jpg';
 import imgBoatShip from './img-boat-ship.jpg';
 import imgBoatTruck from './img-boat-truck.jpg';
-import imgPentaTruck from './img-penta-truck.jpg';
+import imgPentaTruck from './img-penta-truck.png';
 import imgOversized from './img-oversized.jpg';
 
 function App() {
@@ -161,7 +161,7 @@ function App() {
   const translations = {
     tr: {
       nav_home: "Ana Sayfa", nav_services: "Hizmetler", nav_industries: "Sektörler", nav_about: "Kurumsal",
-      nav_gallery: "Operasyonlarımız", // EKLENDİ
+      nav_gallery: "Operasyonlarımız",
       nav_comm: "İletişim", nav_terms: "Şartname", nav_contact: "Teklif Al",
       hero_title: 'Sınırların Ötesine <br/><span class="highlight">Pentagram Logistics</span> ile Ulaşın',
       hero_desc: "İstanbul ve Roma ofislerimizle, global ticaretteki en güçlü çözüm ortağınızız.",
@@ -193,8 +193,8 @@ function App() {
       ind_auto_title: "Yanıcı Maddeler", ind_auto_desc: "Kimya ve endüstriyel üretimde kullanılan yanıcı, parlayıcı ve tehlikeli maddelerin (IMO/ADR) uluslararası regülasyonlara tam uyumlu ve sertifikalı olarak taşınmasında uzmanız.",
       ind_pharma_title: "Yedek Parça", ind_pharma_desc: "Fabrikaların ve üretim hatlarının durmaması için hayati öneme sahip yedek parçaları, 'zaman kritik' hassasiyetle ve ekspres çözümlerle dünyanın her noktasına ulaştırıyoruz.",
 
-      gallery_title: "Sahadan Kareler", // EKLENDİ
-      gallery_subtitle: "Proje, ağır tonaj ve global taşımacılık operasyonlarımızdan bazıları.", // EKLENDİ
+      gallery_title: "Sahadan Kareler",
+      gallery_subtitle: "Proje, ağır tonaj ve global taşımacılık operasyonlarımızdan bazıları.",
 
       sus_title: "Sarsılmaz Güven ve Şeffaflık",
       sus_text: "Pentagram Logistics olarak işimizin merkezine 'Güven'i koyuyoruz. Şeffaf süreç yönetimimiz, ulaşılabilir uzman ekibimiz ve verdiğimiz sözleri tutma konusundaki hassasiyetimizle, yükünüzü değil işinizi sahipleniyoruz. Sürpriz maliyetler yok, sadece planlandığı gibi işleyen kusursuz bir süreç var.",
@@ -230,7 +230,7 @@ function App() {
     },
     en: {
       nav_home: "Home", nav_services: "Services", nav_industries: "Industries", nav_about: "About",
-      nav_gallery: "Our Operations", // EKLENDİ
+      nav_gallery: "Our Operations",
       nav_comm: "Contact", nav_terms: "Terms", nav_contact: "Get Quote",
       hero_title: 'Reach Beyond the Borders with <br/><span class="highlight">Pentagram Logistics</span>',
       hero_desc: "Your strongest partner in global trade with our Istanbul and Rome offices.",
@@ -255,8 +255,8 @@ function App() {
       ind_auto_title: "Dangerous Goods", ind_auto_desc: "We are experts in the transport of flammable, combustible, and dangerous goods (IMO/ADR) used in chemical and industrial production, fully compliant with international regulations.",
       ind_pharma_title: "Spare Parts", ind_pharma_desc: "We deliver vital spare parts to prevent factory stoppages to any point in the world with 'time-critical' precision and express solutions.",
 
-      gallery_title: "Operations Gallery", // EKLENDİ
-      gallery_subtitle: "Some of our project, heavy lift and global transport operations.", // EKLENDİ
+      gallery_title: "Operations Gallery",
+      gallery_subtitle: "Some of our project, heavy lift and global transport operations.",
 
       sus_title: "Unshakable Trust", sus_text: "At Pentagram Logistics, we put 'Trust' at the center of our business. With our transparent process management and accessible expert team, we own your business, not just your cargo. No surprise costs, just a flawless process.", sus_badge: "Reliable Partner",
 
@@ -289,7 +289,7 @@ function App() {
     },
     it: {
       nav_home: "Home", nav_services: "Servizi", nav_industries: "Settori", nav_about: "Chi Siamo",
-      nav_gallery: "Operazioni", // EKLENDİ
+      nav_gallery: "Operazioni",
       nav_comm: "Contatto", nav_terms: "Termini", nav_contact: "Preventivo",
       hero_title: 'Oltrepassa i Confini con <br/><span class="highlight">Pentagram Logistics</span>',
       hero_desc: "Il tuo partner più forte nel commercio globale con i nostri uffici di Istanbul e Roma.",
@@ -314,8 +314,8 @@ function App() {
       ind_auto_title: "Merci Pericolose", ind_auto_desc: "Siamo esperti nel trasporto di merci infiammabili e pericolose (IMO/ADR) utilizzate nella produzione chimica e industriale, in conformità con le normative internazionali.",
       ind_pharma_title: "Pezzi di Ricambio", ind_pharma_desc: "Consegniamo pezzi di ricambio vitali per macchinari in qualsiasi punto del mondo con precisione 'time-critical' e soluzioni espresse.",
 
-      gallery_title: "Galleria Operativa", // EKLENDİ
-      gallery_subtitle: "Alcune delle nostre operazioni di progetto e trasporti globali.", // EKLENDİ
+      gallery_title: "Galleria Operativa",
+      gallery_subtitle: "Alcune delle nostre operazioni di progetto e trasporti globali.",
 
       sus_title: "Fiducia Incrollabile", sus_text: "In Pentagram Logistics, mettiamo la 'Fiducia' al centro. Con la nostra gestione trasparente, facciamo nostro il tuo business. Nessun costo a sorpresa, solo un processo impeccabile.", sus_badge: "Partner Affidabile",
 
@@ -367,7 +367,6 @@ function App() {
             <li><a href="#services" onClick={(e) => { e.preventDefault(); navigateTo('home', 'services'); }}>{t.nav_services}</a></li>
             <li><a href="#industries" onClick={(e) => { e.preventDefault(); navigateTo('home', 'industries'); }}>{t.nav_industries}</a></li>
             <li><a href="#about" onClick={(e) => { e.preventDefault(); navigateTo('home', 'about'); }}>{t.nav_about}</a></li>
-            {/* GALERİ LİNKİ EKLENDİ */}
             <li><a href="#gallery" onClick={(e) => { e.preventDefault(); navigateTo('home', 'gallery'); }}>{t.nav_gallery}</a></li>
             <li><a href="#terms" onClick={(e) => { e.preventDefault(); navigateTo('terms'); }}>{t.nav_terms}</a></li>
             <li><a href="#quote" className="quote-nav-btn" onClick={(e) => { e.preventDefault(); navigateTo('home', 'quote'); }}>{t.nav_contact}</a></li>
@@ -497,7 +496,7 @@ function App() {
             </div>
           </section>
 
-          {/* --- YENİ EKLENEN GALERİ BÖLÜMÜ --- */}
+          {/* --- GALERİ BÖLÜMÜ (6 GÖRSEL) --- */}
           <section id="gallery" className="section-padding">
             <div className="container">
               <div className="section-header">
@@ -534,6 +533,12 @@ function App() {
                 <div className="gallery-item glass-panel">
                   <img src={imgOversized} alt="Oversized Cargo on Lowbed" className="gallery-img" />
                   <div className="gallery-overlay"><span>Endüstriyel Ekipman & Lowbed Taşımacılığı</span></div>
+                </div>
+
+                {/* 6. Ekstra Kopya (Hizalama İçin) */}
+                <div className="gallery-item glass-panel">
+                  <img src={imgOversized} alt="Project Cargo" className="gallery-img" />
+                  <div className="gallery-overlay"><span>Ağır Nakliye & Proje Lojistiği</span></div>
                 </div>
               </div>
             </div>
