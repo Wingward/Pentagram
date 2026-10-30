@@ -6,7 +6,7 @@ import logoImg from './logo.png';
 import imgSteel from './img-steel.jpg';
 import imgBoatShip from './img-boat-ship.jpg';
 import imgBoatTruck from './img-boat-truck.jpg';
-import imgPentaTruck from './img-penta-truck.png';
+import imgPentaTruck from './img-penta-truck.jpg';
 import imgOversized from './img-oversized.jpg';
 
 function App() {
